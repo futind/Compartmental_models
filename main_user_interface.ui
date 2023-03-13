@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_window</class>
+ <widget class="QMainWindow" name="main_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>880</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>880</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="central_widget">
+   <widget class="QGroupBox" name="poluation_groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>191</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Population parameters</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>171</width>
+       <height>62</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="population_params_layout">
+      <item>
+       <layout class="QVBoxLayout" name="pop_params_label_layout">
+        <item>
+         <widget class="QLabel" name="population_size_label">
+          <property name="statusTip">
+           <string>Population size (N) is the total number of people in a population being observed</string>
+          </property>
+          <property name="text">
+           <string>Population size</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="infectious_size_label">
+          <property name="statusTip">
+           <string>Infectious size (I_{0}) is the initial number of infectious people in population</string>
+          </property>
+          <property name="text">
+           <string>Infectious size</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="pop_params_spinBox_layout">
+        <item>
+         <widget class="QSpinBox" name="population_size_spinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="infections_size_spinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="infection_parameters_groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>191</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Infection parameters</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>171</width>
+       <height>94</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="infection_params_layout">
+      <item>
+       <layout class="QVBoxLayout" name="inf_param_label_layout">
+        <item>
+         <widget class="QLabel" name="vitality_rate_label">
+          <property name="statusTip">
+           <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
+          </property>
+          <property name="text">
+           <string>Vitality rate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="contact_rate_label">
+          <property name="statusTip">
+           <string>Contact rate (\beta) is the average number of adequate contacts (meaning contacts that are sufficient for transmission)</string>
+          </property>
+          <property name="text">
+           <string>Contact rate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="recovery_rate_label">
+          <property name="statusTip">
+           <string>Recovery rate (\gamma) corresponds to the speed of a person's movement out of the I compartment into R</string>
+          </property>
+          <property name="text">
+           <string>Recovery rate</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="inf_param_dspinBox_layout">
+        <item>
+         <widget class="QDoubleSpinBox" name="vitality_rate_dSpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="contact_rate_dSpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="recovery_rate_dSpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QTabWidget" name="plotting_widget">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>10</y>
+      <width>631</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="dynamics_graphpane">
+     <attribute name="title">
+      <string>Compartmental dynamics</string>
+     </attribute>
+     <widget class="MPLWidget" name="dynamics_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>611</width>
+        <height>491</height>
+       </rect>
+      </property>
+      <property name="statusTip">
+       <string>Dynamics of compartments S, I and R is displayed here</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="phase_graphpane">
+     <attribute name="title">
+      <string>Phase plane</string>
+     </attribute>
+     <widget class="MPLWidget" name="phase_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>611</width>
+        <height>491</height>
+       </rect>
+      </property>
+      <property name="statusTip">
+       <string>Phase plane I(S) is displayed here</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="sir_model_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>231</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="statusTip">
+     <string>The classic endemic model described in a form of a differential equations system</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="main_window_resources.qrc">:/computational_models/SIR_classic_endemic_model.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="function_display_groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>430</y>
+      <width>191</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Choose a function to display</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>86</width>
+       <height>83</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="function_display_layout">
+      <item>
+       <widget class="QCheckBox" name="suseptible_checkBox">
+        <property name="statusTip">
+         <string>Suseptible (S) is a compartment that describes the number of people, who are suseptible to an infection</string>
+        </property>
+        <property name="text">
+         <string>Suseptible</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="infectious_checkBox">
+        <property name="statusTip">
+         <string>Infectious (I) is a compartment that describes the number of people who are, at the time, infected</string>
+        </property>
+        <property name="text">
+         <string>Infectious</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="recovered_checkBox">
+        <property name="statusTip">
+         <string>Recovered (R) compartment describes the number of people who recovered from the infection or dead because of it</string>
+        </property>
+        <property name="text">
+         <string>Recovered</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>191</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="buttons_layout">
+     <item>
+      <widget class="QPushButton" name="perform_button">
+       <property name="statusTip">
+        <string>Perform the calculation and plot the graphics</string>
+       </property>
+       <property name="text">
+        <string>Perform the calculation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clear_button">
+       <property name="statusTip">
+        <string>Clear the graphics</string>
+       </property>
+       <property name="text">
+        <string>Clear the graph panels</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>880</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="perform_action"/>
+    <addaction name="clear_action"/>
+    <addaction name="reset_action"/>
+    <addaction name="separator"/>
+    <addaction name="quit_action"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="perform_action">
+   <property name="text">
+    <string>Perform the calculation</string>
+   </property>
+   <property name="statusTip">
+    <string>Perform the calculation and plot the graphics</string>
+   </property>
+  </action>
+  <action name="clear_action">
+   <property name="text">
+    <string>Clear the graph panels</string>
+   </property>
+   <property name="statusTip">
+    <string>Clear the graphics</string>
+   </property>
+  </action>
+  <action name="reset_action">
+   <property name="text">
+    <string>Reset the parameters</string>
+   </property>
+   <property name="statusTip">
+    <string>Reset the parameters to their default values</string>
+   </property>
+  </action>
+  <action name="quit_action">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="statusTip">
+    <string>Quit the application</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MPLWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">mpl_widget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="main_window_resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
