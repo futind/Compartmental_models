@@ -12,8 +12,8 @@ class MPLWidget(QtWidgets.QWidget):
         # Create toolbar object
         self.mpl_toolbar = NavigationToolbar(self.canvas)
         # Set box for plotting
-        self.vbl = QtWidgets.QVBoxLayout()
-        self.vbl.addWidget(self.canvas)
-        self.vbl.addWidget(self.mpl_toolbar)
-        self.setLayout(self.vbl)
+        self.vertical_mpl_layout = QtWidgets.QVBoxLayout()
+        self.vertical_mpl_layout.addWidget(self.canvas)
+        self.vertical_mpl_layout.addWidget(self.mpl_toolbar)
+        self.setLayout(self.vertical_mpl_layout)
         
