@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -78,9 +78,9 @@
    <widget class="QLabel" name="sir_model_label">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>0</y>
-      <width>231</width>
+      <width>221</width>
       <height>131</height>
      </rect>
     </property>
@@ -124,6 +124,9 @@
         <property name="text">
          <string>Suseptible</string>
         </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -134,6 +137,9 @@
         <property name="text">
          <string>Infectious</string>
         </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -143,6 +149,9 @@
         </property>
         <property name="text">
          <string>Recovered</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -198,7 +207,7 @@
       <rect>
        <x>9</x>
        <y>30</y>
-       <width>171</width>
+       <width>174</width>
        <height>28</height>
       </rect>
      </property>
@@ -220,6 +229,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="maximum">
+         <number>9999999</number>
+        </property>
+        <property name="value">
+         <number>365</number>
         </property>
        </widget>
       </item>
@@ -243,7 +258,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>171</width>
+       <width>180</width>
        <height>62</height>
       </rect>
      </property>
@@ -282,6 +297,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximum">
+           <number>99999999</number>
+          </property>
+          <property name="value">
+           <number>10000</number>
+          </property>
          </widget>
         </item>
         <item>
@@ -291,6 +312,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>99999998</number>
+          </property>
+          <property name="value">
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -365,6 +392,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="value">
+           <double>0.020000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -375,6 +405,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="value">
+           <double>3.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -384,6 +417,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>

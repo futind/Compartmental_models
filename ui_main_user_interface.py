@@ -62,7 +62,7 @@ class Ui_main_window(object):
         self.plotting_widget.addTab(self.phase_graphpane, "")
         self.sir_model_label = QLabel(self.central_widget)
         self.sir_model_label.setObjectName(u"sir_model_label")
-        self.sir_model_label.setGeometry(QRect(0, 0, 231, 131))
+        self.sir_model_label.setGeometry(QRect(10, 0, 221, 131))
         self.sir_model_label.setPixmap(QPixmap(u":/computational_models/SIR_classic_endemic_model.png"))
         self.function_display_groupBox = QGroupBox(self.central_widget)
         self.function_display_groupBox.setObjectName(u"function_display_groupBox")
@@ -75,16 +75,19 @@ class Ui_main_window(object):
         self.function_display_layout.setContentsMargins(0, 0, 0, 0)
         self.suseptible_checkBox = QCheckBox(self.layoutWidget)
         self.suseptible_checkBox.setObjectName(u"suseptible_checkBox")
+        self.suseptible_checkBox.setChecked(True)
 
         self.function_display_layout.addWidget(self.suseptible_checkBox)
 
         self.infectious_checkBox = QCheckBox(self.layoutWidget)
         self.infectious_checkBox.setObjectName(u"infectious_checkBox")
+        self.infectious_checkBox.setChecked(True)
 
         self.function_display_layout.addWidget(self.infectious_checkBox)
 
         self.recovered_checkBox = QCheckBox(self.layoutWidget)
         self.recovered_checkBox.setObjectName(u"recovered_checkBox")
+        self.recovered_checkBox.setChecked(True)
 
         self.function_display_layout.addWidget(self.recovered_checkBox)
 
@@ -109,7 +112,7 @@ class Ui_main_window(object):
         self.observation_time_groupBox.setGeometry(QRect(20, 380, 191, 71))
         self.layoutWidget2 = QWidget(self.observation_time_groupBox)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(9, 30, 171, 28))
+        self.layoutWidget2.setGeometry(QRect(9, 30, 174, 28))
         self.observation_time_layout = QHBoxLayout(self.layoutWidget2)
         self.observation_time_layout.setObjectName(u"observation_time_layout")
         self.observation_time_layout.setContentsMargins(0, 0, 0, 0)
@@ -125,6 +128,8 @@ class Ui_main_window(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.observation_time_spinBox.sizePolicy().hasHeightForWidth())
         self.observation_time_spinBox.setSizePolicy(sizePolicy1)
+        self.observation_time_spinBox.setMaximum(9999999)
+        self.observation_time_spinBox.setValue(365)
 
         self.observation_time_layout.addWidget(self.observation_time_spinBox)
 
@@ -133,7 +138,7 @@ class Ui_main_window(object):
         self.poluation_groupBox.setGeometry(QRect(20, 130, 191, 101))
         self.layoutWidget3 = QWidget(self.poluation_groupBox)
         self.layoutWidget3.setObjectName(u"layoutWidget3")
-        self.layoutWidget3.setGeometry(QRect(10, 30, 171, 62))
+        self.layoutWidget3.setGeometry(QRect(10, 30, 180, 62))
         self.population_params_layout = QHBoxLayout(self.layoutWidget3)
         self.population_params_layout.setObjectName(u"population_params_layout")
         self.population_params_layout.setContentsMargins(0, 0, 0, 0)
@@ -158,6 +163,8 @@ class Ui_main_window(object):
         self.population_size_spinBox.setObjectName(u"population_size_spinBox")
         sizePolicy1.setHeightForWidth(self.population_size_spinBox.sizePolicy().hasHeightForWidth())
         self.population_size_spinBox.setSizePolicy(sizePolicy1)
+        self.population_size_spinBox.setMaximum(99999999)
+        self.population_size_spinBox.setValue(10000)
 
         self.pop_params_spinBox_layout.addWidget(self.population_size_spinBox)
 
@@ -165,6 +172,8 @@ class Ui_main_window(object):
         self.infections_size_spinBox.setObjectName(u"infections_size_spinBox")
         sizePolicy1.setHeightForWidth(self.infections_size_spinBox.sizePolicy().hasHeightForWidth())
         self.infections_size_spinBox.setSizePolicy(sizePolicy1)
+        self.infections_size_spinBox.setMaximum(99999998)
+        self.infections_size_spinBox.setValue(1)
 
         self.pop_params_spinBox_layout.addWidget(self.infections_size_spinBox)
 
@@ -206,6 +215,7 @@ class Ui_main_window(object):
         self.vitality_rate_dSpinBox.setObjectName(u"vitality_rate_dSpinBox")
         sizePolicy1.setHeightForWidth(self.vitality_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.vitality_rate_dSpinBox.setSizePolicy(sizePolicy1)
+        self.vitality_rate_dSpinBox.setValue(0.020000000000000)
 
         self.inf_param_dspinBox_layout.addWidget(self.vitality_rate_dSpinBox)
 
@@ -213,6 +223,7 @@ class Ui_main_window(object):
         self.contact_rate_dSpinBox.setObjectName(u"contact_rate_dSpinBox")
         sizePolicy1.setHeightForWidth(self.contact_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.contact_rate_dSpinBox.setSizePolicy(sizePolicy1)
+        self.contact_rate_dSpinBox.setValue(3.000000000000000)
 
         self.inf_param_dspinBox_layout.addWidget(self.contact_rate_dSpinBox)
 
@@ -220,6 +231,7 @@ class Ui_main_window(object):
         self.recovery_rate_dSpinBox.setObjectName(u"recovery_rate_dSpinBox")
         sizePolicy1.setHeightForWidth(self.recovery_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.recovery_rate_dSpinBox.setSizePolicy(sizePolicy1)
+        self.recovery_rate_dSpinBox.setValue(1.000000000000000)
 
         self.inf_param_dspinBox_layout.addWidget(self.recovery_rate_dSpinBox)
 
@@ -246,7 +258,7 @@ class Ui_main_window(object):
 
         self.retranslateUi(main_window)
 
-        self.plotting_widget.setCurrentIndex(1)
+        self.plotting_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(main_window)
@@ -332,11 +344,3 @@ class Ui_main_window(object):
         self.recovery_rate_label.setText(QCoreApplication.translate("main_window", u"Recovery rate", None))
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"File", None))
     # retranslateUi
-"""
-Error: main_user_interface.ui: Warning: The name 'layoutWidget' (QWidget) is already in use, defaulting to 'layoutWidget1'.
-main_user_interface.ui: Warning: The name 'layoutWidget' (QWidget) is already in use, defaulting to 'layoutWidget2'.
-main_user_interface.ui: Warning: The name 'layoutWidget' (QWidget) is already in use, defaulting to 'layoutWidget3'.
-main_user_interface.ui: Warning: The name 'layoutWidget' (QWidget) is already in use, defaulting to 'layoutWidget4'.
-
-while executing '/home/frostled/.local/lib/python3.10/site-packages/PySide6/Qt/libexec/uic -g python main_user_interface.ui'
-"""
