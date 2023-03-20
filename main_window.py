@@ -33,10 +33,11 @@ class MainWindow(QMainWindow, Ui_main_window):
         contact_rate = self.contact_rate_dSpinBox.value()
         recovery_rate = self.recovery_rate_dSpinBox.value()
         suseptible = total_population - infectious
+        recovered = total_population - infectious - suseptible
         observation_time = self.observation_time_spinBox.value()
 
         step = 1
-        sir = SIR_model(suseptible, infectious, recovery_rate, total_population, contact_rate, recovery_rate, observation_time)
+        sir = SIR_model(suseptible, infectious, recovered, total_population, contact_rate, recovery_rate, observation_time)
         sir.compute(step)
 
         # TO DO 1: make the graphics appear (so make the system and RK4 and etc bruh)
