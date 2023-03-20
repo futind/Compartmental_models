@@ -28,7 +28,7 @@ class Ui_main_window(object):
     def setupUi(self, main_window):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
-        main_window.resize(1000, 700)
+        main_window.resize(1000, 743)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -47,18 +47,18 @@ class Ui_main_window(object):
         self.central_widget.setObjectName(u"central_widget")
         self.plotting_widget = QTabWidget(self.central_widget)
         self.plotting_widget.setObjectName(u"plotting_widget")
-        self.plotting_widget.setGeometry(QRect(240, 10, 751, 641))
+        self.plotting_widget.setGeometry(QRect(240, 10, 751, 681))
         self.dynamics_graphpane = QWidget()
         self.dynamics_graphpane.setObjectName(u"dynamics_graphpane")
         self.dynamics_graph = MPLWidget(self.dynamics_graphpane)
         self.dynamics_graph.setObjectName(u"dynamics_graph")
-        self.dynamics_graph.setGeometry(QRect(10, 10, 731, 591))
+        self.dynamics_graph.setGeometry(QRect(10, 10, 731, 631))
         self.plotting_widget.addTab(self.dynamics_graphpane, "")
         self.phase_graphpane = QWidget()
         self.phase_graphpane.setObjectName(u"phase_graphpane")
         self.phase_graph = MPLWidget(self.phase_graphpane)
         self.phase_graph.setObjectName(u"phase_graph")
-        self.phase_graph.setGeometry(QRect(10, 10, 731, 591))
+        self.phase_graph.setGeometry(QRect(10, 10, 731, 631))
         self.plotting_widget.addTab(self.phase_graphpane, "")
         self.sir_model_label = QLabel(self.central_widget)
         self.sir_model_label.setObjectName(u"sir_model_label")
@@ -93,7 +93,7 @@ class Ui_main_window(object):
 
         self.layoutWidget1 = QWidget(self.central_widget)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(20, 590, 191, 58))
+        self.layoutWidget1.setGeometry(QRect(20, 630, 191, 58))
         self.buttons_layout = QVBoxLayout(self.layoutWidget1)
         self.buttons_layout.setObjectName(u"buttons_layout")
         self.buttons_layout.setContentsMargins(0, 0, 0, 0)
@@ -238,6 +238,9 @@ class Ui_main_window(object):
 
         self.infection_params_layout.addLayout(self.inf_param_dspinBox_layout)
 
+        self.basic_reproduction_number_label = QLabel(self.central_widget)
+        self.basic_reproduction_number_label.setObjectName(u"basic_reproduction_number_label")
+        self.basic_reproduction_number_label.setGeometry(QRect(20, 589, 191, 31))
         main_window.setCentralWidget(self.central_widget)
         self.menubar = QMenuBar(main_window)
         self.menubar.setObjectName(u"menubar")
@@ -258,7 +261,7 @@ class Ui_main_window(object):
 
         self.retranslateUi(main_window)
 
-        self.plotting_widget.setCurrentIndex(0)
+        self.plotting_widget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(main_window)
@@ -342,5 +345,6 @@ class Ui_main_window(object):
         self.recovery_rate_label.setStatusTip(QCoreApplication.translate("main_window", u"Recovery rate (\\gamma) corresponds to the speed of a person's movement out of the I compartment into R", None))
 #endif // QT_CONFIG(statustip)
         self.recovery_rate_label.setText(QCoreApplication.translate("main_window", u"Recovery rate", None))
+        self.basic_reproduction_number_label.setText(QCoreApplication.translate("main_window", u"Basic reproduction number:", None))
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"File", None))
     # retranslateUi
