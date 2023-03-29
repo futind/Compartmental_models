@@ -1,4 +1,3 @@
-
 class SIR_model:
     # A list, which contains all the instaces of a class
     instances = []
@@ -37,10 +36,13 @@ class SIR_model:
         # Time of observation in days(T)
         self.__observation_time = T
 
+        # The basic reproduction number, one of most important
+        # threshold qualities of an infection 
+        self.__basic_reproduction_number = self.contact_rate / self.recovery_rate
+
         # Lists that hold the computation data
         # They are needed so we don't have to compute
         # every time we want to 
-        
         self.suseptible_data = list()
         self.infectious_data = list()
         self.recovered_data = list()
@@ -48,6 +50,11 @@ class SIR_model:
         
         # Adding a created instance into a list of all instances
         SIR_model.instances.append(self)
+    
+    # Adding a representation of our class
+    def __repr__(self):
+        return f'SIR(S = {self.suseptible}, I = {self.infectious}, R ={self.recovered}, ' \
+               f'N = {self.total_population}), beta = {self.contact_rate}, gamma = {self.recovery_rate})'
     
     # Getter for total population (N)
     @property
@@ -127,6 +134,7 @@ class SIR_model:
             raise ValueError()
         else:
             self.__contact_rate = beta
+            self.__basic_reproduction_number = self.contact_rate / self.recovery_rate
     
     # Getter for recovery rate (gamma)
     @property
@@ -140,6 +148,7 @@ class SIR_model:
             raise ValueError()
         else:
             self.__recovery_rate = gamma
+            self.__basic_reproduction_number = self.contact_rate / self.recovery_rate
     
     # Getter for time of observation (T)
     @property
@@ -154,6 +163,12 @@ class SIR_model:
         else:
             self.__observation_time = T
     
+    # Getter for basic reproduction number (R0)
+    @property
+    def basic_reproduction_number(self):
+        return self.__basic_reproduction_number
+    # NO SETTER FOR IT IS NEEDED, THIS VALUE MUST BE CALCULATED
+    
     # Dynamics equation for suseptible compartment (dS/dt basically)
     def suseptible_dynamics(self, S_step_increment = 0.0, I_step_increment = 0.0):
         return (- self.contact_rate * (self.infectious_data[-1] + I_step_increment) 
@@ -166,7 +181,7 @@ class SIR_model:
                 - self.recovery_rate * (self.infectious_data[-1] + I_step_increment))
 
     # Dynamics equation for recovered compartment (dR/dt)
-    def recovered_dynamics(self, I_step_increment = 0.0):
+    def recovered_dynamics(self, I_step_increment = 0.0, R_step_increment = 0.0):
         return self.recovery_rate * (self.infectious_data[-1] + I_step_increment)
     
     def Runge_Kutta_fourth_order(self, increment):
@@ -176,24 +191,22 @@ class SIR_model:
 
         s2 = self.suseptible_dynamics(increment * s1 / 2.0, increment * i1 / 2.0)
         i2 = self.infectious_dynamics(increment * s1 / 2.0, increment * i1 / 2.0)
-        r2 = self.recovered_dynamics(increment * i1 / 2.0)
+        r2 = self.recovered_dynamics(increment * i1 / 2.0, increment * r1 / 2.0)
 
         s3 = self.suseptible_dynamics(increment * s2 / 2.0, increment * i2 / 2.0)
         i3 = self.infectious_dynamics(increment * s2 / 2.0, increment * i2 / 2.0)
-        r3 = self.recovered_dynamics(increment * i2 / 2.0)
+        r3 = self.recovered_dynamics(increment * i2 / 2.0, increment * r2 / 2.0)
 
         s4 = self.suseptible_dynamics(increment * s3, increment * i3)
         i4 = self.infectious_dynamics(increment * s3, increment * i3)
-        r4 = self.recovered_dynamics(increment * i3)
+        r4 = self.recovered_dynamics(increment * i3, increment * r3 / 2.0)
 
         self.suseptible_data.append(self.suseptible_data[-1] + (increment / 6.0) * (s1 + (2.0 * s2) + (2.0 * s3) + s4))
         self.infectious_data.append(self.infectious_data[-1] + (increment / 6.0) * (i1 + (2.0 * i2) + (2.0 * i3) + i4))
         self.recovered_data.append(self.recovered_data[-1] + (increment / 6.0) * (r1 + (2.0 * r2) + (2.0 * r3) + r4))
     
-    # TO DO: This method have to return list of S, I, R comparmental
-    # dynamics at from the time t to time (t + increment)
-    # [S, I, R]
-    # For this, we have to implement 4 order Runge-Kutta's method
+    # method which actually uses Runge-Kutta's fourth order numerical method
+    # for integration 
     def compute(self, increment: float):
         self.suseptible_data.clear()
         self.infectious_data.clear()
