@@ -1,5 +1,6 @@
 <RCC>
-  <qresource prefix="computational_models">
-    <file>SIR_classic_endemic_model.png</file>
+  <qresource prefix="Models">
+    <file>resources/images/SIR_classic_epidemic_model.png</file>
+    <file>resources/images/SIR_classic_endemic_model.png</file>
   </qresource>
 </RCC>

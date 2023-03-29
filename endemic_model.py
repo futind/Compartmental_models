@@ -29,6 +29,12 @@ class SIR_vitality(SIR_model):
             if (self.recovery_rate > 0.0):
                 self.__basic_reproduction_number = self.contact_rate / (self.recovery_rate + self.__vitality_rate)
     
+    # Getter for basic reproduction number (R0)
+    @property
+    def basic_reproduction_number(self):
+        return self.__basic_reproduction_number
+    # NO SETTER FOR IT IS NEEDED, THIS VALUE MUST BE CALCULATED
+
     def suseptible_dynamics(self, S_step_increment = 0.0, I_step_increment = 0.0):
         return (self.vitality_rate * self.total_population - self.vitality_rate 
                 * (self.suseptible_data[-1] + S_step_increment) 

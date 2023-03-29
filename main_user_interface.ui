@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -75,13 +75,13 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="sir_model_label">
+   <widget class="QLabel" name="sir_classic_label">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>221</width>
-      <height>131</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="statusTip">
@@ -91,15 +91,18 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="main_window_resources.qrc">:/computational_models/SIR_classic_endemic_model.png</pixmap>
+     <pixmap resource="main_window_resources.qrc">:/Models/resources/images/SIR_classic_epidemic_model.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QGroupBox" name="function_display_groupBox">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>460</y>
-      <width>191</width>
+      <y>500</y>
+      <width>201</width>
       <height>121</height>
      </rect>
     </property>
@@ -163,7 +166,7 @@
      <rect>
       <x>20</x>
       <y>630</y>
-      <width>191</width>
+      <width>201</width>
       <height>58</height>
      </rect>
     </property>
@@ -194,8 +197,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>380</y>
-      <width>191</width>
+      <y>390</y>
+      <width>201</width>
       <height>71</height>
      </rect>
     </property>
@@ -207,7 +210,7 @@
       <rect>
        <x>9</x>
        <y>30</y>
-       <width>174</width>
+       <width>181</width>
        <height>28</height>
       </rect>
      </property>
@@ -246,7 +249,7 @@
      <rect>
       <x>20</x>
       <y>130</y>
-      <width>191</width>
+      <width>201</width>
       <height>101</height>
      </rect>
     </property>
@@ -331,8 +334,8 @@
      <rect>
       <x>20</x>
       <y>240</y>
-      <width>191</width>
-      <height>131</height>
+      <width>201</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="title">
@@ -343,23 +346,13 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>171</width>
-       <height>94</height>
+       <width>181</width>
+       <height>61</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="infection_params_layout">
+     <layout class="QHBoxLayout" name="v_2">
       <item>
        <layout class="QVBoxLayout" name="inf_param_label_layout">
-        <item>
-         <widget class="QLabel" name="vitality_rate_label">
-          <property name="statusTip">
-           <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
-          </property>
-          <property name="text">
-           <string>Vitality rate</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QLabel" name="contact_rate_label">
           <property name="statusTip">
@@ -384,19 +377,6 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="inf_param_dspinBox_layout">
-        <item>
-         <widget class="QDoubleSpinBox" name="vitality_rate_dSpinBox">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="value">
-           <double>0.020000000000000</double>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QDoubleSpinBox" name="contact_rate_dSpinBox">
           <property name="sizePolicy">
@@ -432,14 +412,86 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>589</y>
+      <y>460</y>
       <width>191</width>
-      <height>31</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Basic reproduction number:</string>
     </property>
+   </widget>
+   <widget class="QLabel" name="sir_vitality_label">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>221</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="main_window_resources.qrc">:/Models/resources/images/SIR_classic_endemic_model.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>350</y>
+      <width>181</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="vitality_rate_layout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="vitality_rate_label">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="statusTip">
+        <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
+       </property>
+       <property name="text">
+        <string>Vitality rate</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="vitality_rate_dSpinBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="value">
+        <double>0.020000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -461,7 +513,15 @@
     <addaction name="separator"/>
     <addaction name="quit_action"/>
    </widget>
+   <widget class="QMenu" name="menuModel">
+    <property name="title">
+     <string>Model</string>
+    </property>
+    <addaction name="sir_classic_action"/>
+    <addaction name="sir_vitality_action"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuModel"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="perform_action">
@@ -494,6 +554,16 @@
    </property>
    <property name="statusTip">
     <string>Quit the application</string>
+   </property>
+  </action>
+  <action name="sir_classic_action">
+   <property name="text">
+    <string>Classic SIR model</string>
+   </property>
+  </action>
+  <action name="sir_vitality_action">
+   <property name="text">
+    <string>SIR model with vitality</string>
    </property>
   </action>
  </widget>
