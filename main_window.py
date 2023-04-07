@@ -54,7 +54,13 @@ class MainWindow(QMainWindow, Ui_main_window):
             self.dynamics_graph.canvas.ax.plot(self.model.time_data, self.model.infectious_data, label = 'I(t)')
         if (self.recovered_checkBox.isChecked()):
             self.dynamics_graph.canvas.ax.plot(self.model.time_data, self.model.recovered_data, label = 'R(t)')
-
+        if (self.population_checkBox.isChecked()):
+            self.dynamics_graph.canvas.ax.plot(self.model.time_data, self.model.population_data, label = 'N(t)')
+        if (self.sirsum_test_checkbox.isChecked()):
+            self.dynamics_graph.canvas.ax.plot(self.model.time_data, self.model.sirsum_test_data, label = 'S+I+R')
+            for t in self.model.time_data:
+                print(f'N[{int(t)}]: {self.model.population_data[int(t)]} - S+I+R[{int(t)}]: {self.model.sirsum_test_data[int(t)]}')
+        
         # displaying a phase pane graph
         self.phase_graph.canvas.ax.plot(self.model.suseptible_data, self.model.infectious_data, label = 'I(S)')
         self.phase_graph.canvas.ax.plot(range(0, self.model.total_population, 1), range(self.model.total_population, 0, -1))
@@ -83,8 +89,8 @@ class MainWindow(QMainWindow, Ui_main_window):
                                    self.recovery_rate, self.observation_time)
         elif (self.model_index == 1):
             self.model = SIR_vitality(self.suseptible, self.infectious, self.recovered,
-                                      self.total_population, self.observation_time,
-                                      self.contact_rate, self.recovery_rate, self.vitality_rate)
+                                      self.total_population, self.observation_time, self.contact_rate,
+                                      self.recovery_rate, self.mortality_rate, self.total_births)
         else:
             raise ValueError()
         
@@ -102,9 +108,11 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.observation_time = self.observation_time_spinBox.value()
 
         if (self.model_index == 1):
-            self.vitality_rate = self.vitality_rate_dSpinBox.value()
+            self.mortality_rate = self.mortality_rate_dSpinBox.value()
+            self.total_births = self.total_births_spinBox.value()
         else:
-            self.vitality_rate = -1
+            self.mortality_rate = -1
+            self.total_births = -1
 
         self.suseptible = self.total_population - self.infectious
         self.recovered = self.total_population - self.infectious - self.suseptible
@@ -132,27 +140,35 @@ class MainWindow(QMainWindow, Ui_main_window):
     
     def change_graph_visibility(self):
         if (self.model != None):
-            self.draw(self.model)
+            self.draw()
     
 
     def change_model_sir_classic(self):
         self.model_index = 0
 
+        self.model_on_display_label.setText("Model: Classic SIR")
+
         self.sir_classic_label.setVisible(True)
         self.sir_vitality_label.setVisible(False)
 
-        self.vitality_rate_label.setVisible(False)
-        self.vitality_rate_dSpinBox.setVisible(False)
-   
+        self.pop_dynamics_groupBox.setVisible(False)
+
+        self.population_checkBox.setVisible(False)
+        self.sirsum_test_checkbox.setVisible(False)
+
         self.clear()
     
     def change_model_sir_vitality(self):
         self.model_index = 1
 
+        self.model_on_display_label.setText("Model: SIR with vitality dynamics")
+
         self.sir_classic_label.setVisible(False)
         self.sir_vitality_label.setVisible(True)
 
-        self.vitality_rate_label.setVisible(True)
-        self.vitality_rate_dSpinBox.setVisible(True)
+        self.pop_dynamics_groupBox.setVisible(True)
+
+        self.population_checkBox.setVisible(True)
+        self.sirsum_test_checkbox.setVisible(True)
 
         self.clear()

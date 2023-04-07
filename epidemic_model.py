@@ -172,12 +172,12 @@ class SIR_model:
     # Dynamics equation for suseptible compartment (dS/dt basically)
     def suseptible_dynamics(self, S_step_increment = 0.0, I_step_increment = 0.0):
         return (- self.contact_rate * (self.infectious_data[-1] + I_step_increment) 
-                * ((self.suseptible_data[-1] + S_step_increment) / self.total_population))
+                * (self.suseptible_data[-1] + S_step_increment))
     
     # Dynamics equation for infectious compartment (dI/dt)
     def infectious_dynamics(self, S_step_increment = 0.0, I_step_increment = 0.0):
         return (self.contact_rate * (self.infectious_data[-1] + I_step_increment) * 
-                ((self.suseptible_data[-1] + S_step_increment)/ self.total_population) 
+                (self.suseptible_data[-1] + S_step_increment) 
                 - self.recovery_rate * (self.infectious_data[-1] + I_step_increment))
 
     # Dynamics equation for recovered compartment (dR/dt)
@@ -199,7 +199,7 @@ class SIR_model:
 
         s4 = self.suseptible_dynamics(increment * s3, increment * i3)
         i4 = self.infectious_dynamics(increment * s3, increment * i3)
-        r4 = self.recovered_dynamics(increment * i3, increment * r3 / 2.0)
+        r4 = self.recovered_dynamics(increment * i3, increment * r3)
 
         self.suseptible_data.append(self.suseptible_data[-1] + (increment / 6.0) * (s1 + (2.0 * s2) + (2.0 * s3) + s4))
         self.infectious_data.append(self.infectious_data[-1] + (increment / 6.0) * (i1 + (2.0 * i2) + (2.0 * i3) + i4))

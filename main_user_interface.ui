@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>743</height>
+    <width>1067</width>
+    <height>801</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,12 +31,12 @@
      <rect>
       <x>240</x>
       <y>10</y>
-      <width>751</width>
-      <height>681</height>
+      <width>821</width>
+      <height>741</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -47,8 +47,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>731</width>
-        <height>631</height>
+        <width>801</width>
+        <height>691</height>
        </rect>
       </property>
       <property name="statusTip">
@@ -65,8 +65,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>731</width>
-        <height>631</height>
+        <width>801</width>
+        <height>691</height>
        </rect>
       </property>
       <property name="statusTip">
@@ -79,7 +79,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>40</y>
       <width>221</width>
       <height>121</height>
      </rect>
@@ -100,9 +100,9 @@
    <widget class="QGroupBox" name="function_display_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>500</y>
-      <width>201</width>
+      <x>10</x>
+      <y>560</y>
+      <width>221</width>
       <height>121</height>
      </rect>
     </property>
@@ -114,7 +114,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>86</width>
+       <width>96</width>
        <height>83</height>
       </rect>
      </property>
@@ -160,13 +160,39 @@
       </item>
      </layout>
     </widget>
+    <widget class="QCheckBox" name="population_checkBox">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>30</y>
+       <width>90</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Population</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="sirsum_test_checkbox">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>60</y>
+       <width>90</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>S+I+R</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>630</y>
-      <width>201</width>
+      <x>10</x>
+      <y>690</y>
+      <width>221</width>
       <height>58</height>
      </rect>
     </property>
@@ -196,9 +222,9 @@
    <widget class="QGroupBox" name="observation_time_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>390</y>
-      <width>201</width>
+      <x>10</x>
+      <y>460</y>
+      <width>221</width>
       <height>71</height>
      </rect>
     </property>
@@ -210,7 +236,7 @@
       <rect>
        <x>9</x>
        <y>30</y>
-       <width>181</width>
+       <width>198</width>
        <height>28</height>
       </rect>
      </property>
@@ -247,21 +273,21 @@
    <widget class="QGroupBox" name="poluation_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>201</width>
+      <x>10</x>
+      <y>160</y>
+      <width>221</width>
       <height>101</height>
      </rect>
     </property>
     <property name="title">
-     <string>Population parameters</string>
+     <string>Initial parameters</string>
     </property>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>180</width>
+       <width>204</width>
        <height>62</height>
       </rect>
      </property>
@@ -304,7 +330,7 @@
            <number>99999999</number>
           </property>
           <property name="value">
-           <number>10000</number>
+           <number>1000000</number>
           </property>
          </widget>
         </item>
@@ -332,9 +358,9 @@
    <widget class="QGroupBox" name="infection_parameters_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>240</y>
-      <width>201</width>
+      <x>10</x>
+      <y>260</y>
+      <width>221</width>
       <height>101</height>
      </rect>
     </property>
@@ -346,11 +372,11 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>181</width>
+       <width>201</width>
        <height>61</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="v_2">
+     <layout class="QHBoxLayout" name="inf_parameters_layout">
       <item>
        <layout class="QVBoxLayout" name="inf_param_label_layout">
         <item>
@@ -411,10 +437,10 @@
    <widget class="QLabel" name="basic_reproduction_number_label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>460</y>
-      <width>191</width>
-      <height>41</height>
+      <x>10</x>
+      <y>530</y>
+      <width>221</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -428,7 +454,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>40</y>
       <width>221</width>
       <height>121</height>
      </rect>
@@ -443,55 +469,115 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QGroupBox" name="pop_dynamics_groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>350</y>
-      <width>181</width>
-      <height>28</height>
+      <x>10</x>
+      <y>360</y>
+      <width>221</width>
+      <height>101</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="vitality_rate_layout">
-     <property name="spacing">
-      <number>6</number>
+    <property name="title">
+     <string>Population dynamics parameters</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
+       <height>64</height>
+      </rect>
      </property>
-     <item>
-      <widget class="QLabel" name="vitality_rate_label">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="statusTip">
-        <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
-       </property>
-       <property name="text">
-        <string>Vitality rate</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="vitality_rate_dSpinBox">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="value">
-        <double>0.020000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     <layout class="QVBoxLayout" name="pop_dynamics_layout">
+      <item>
+       <layout class="QHBoxLayout" name="mortality_rate_layout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="mortality_rate_label">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="statusTip">
+           <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
+          </property>
+          <property name="text">
+           <string>Mortality rate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="mortality_rate_dSpinBox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.004000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="total_births_layout">
+        <item>
+         <widget class="QLabel" name="total_births_label">
+          <property name="text">
+           <string>Total births</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="total_births_spinBox">
+          <property name="maximum">
+           <number>9999999</number>
+          </property>
+          <property name="singleStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>5000</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="model_on_display_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>16</y>
+      <width>221</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Model: Classic SIR</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -499,7 +585,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1067</width>
      <height>22</height>
     </rect>
    </property>
