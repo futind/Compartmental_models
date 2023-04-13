@@ -58,6 +58,8 @@ class SIR_model:
         
         # Adding a created instance into a list of all instances
         SIR_model.instances.append(self)
+
+        print(f'VITALITY: {self.instances}')
     
     # Adding a representation of our class
     def __repr__(self):

@@ -1,8 +1,12 @@
 from PySide6.QtWidgets import QMainWindow
+from PySide6.QtGui import QPixmap
+
 from ui_main_user_interface import Ui_main_window
 
 from epidemic_model import SIR_model
 from endemic_model import SIR_vitality
+
+
 
 class MainWindow(QMainWindow, Ui_main_window):
     def __init__(self, app):
@@ -24,19 +28,27 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.quit_action.triggered.connect(self.quit)
 
         #
-        self.sir_classic_action.triggered.connect(self.change_model_sir_classic)
-        self.sir_vitality_action.triggered.connect(self.change_model_sir_vitality)
+        self.standard_incidence_action.triggered.connect(self.change_model_sir_classic)
+        self.mass_action_incidence_action.triggered.connect(self.change_model_sir_classic)
+        
+        #
+        self.pop_standard_incidence_action.triggered.connect(self.change_model_sir_vitality)
+        self.pop_mass_action_incidence_action.triggered.connect(self.change_model_sir_vitality)
 
         # binding checkBox's "state changed" signals to slot, which redraws 
         # the graphics every time. Hopefully, it is a temporary solution.
-        # TO DO: MAKE A NORMAL HIDE/DISPLAY FUCNTION'S GRAPH SLOT!
+        # TODO: MAKE A NORMAL HIDE/DISPLAY FUCNTION'S GRAPH SLOT!
         self.suseptible_checkBox.stateChanged.connect(self.change_graph_visibility)
         self.infectious_checkBox.stateChanged.connect(self.change_graph_visibility)
         self.recovered_checkBox.stateChanged.connect(self.change_graph_visibility)
+        
+        self.standard_radioButton.triggered.connect(self.change_incidence_MAI)
+        self.mass_action_radioButton.triggered.connect(self.change_incidence_SI)
 
         # creating a model class, so if there is no model instantiated,
         # checkbox's slot wouldn't do anything
         self.model = None
+        self.model_incidence = True
         self.model_index = 0
         self.change_model_sir_classic()
 
@@ -75,6 +87,8 @@ class MainWindow(QMainWindow, Ui_main_window):
 
         # time step is set as 1 day
         step = 1
+
+        
 
         #
         if (self.model_index == 0):
@@ -134,25 +148,55 @@ class MainWindow(QMainWindow, Ui_main_window):
         if (self.model != None):
             self.draw(self.model)
     
+    #
+    def change_incidence_MAI(self):
+        self.model_incidence = True
+    
+    #
+    def change_incidence_SI(self):
+        self.model_incidence = False
+        
 
     def change_model_sir_classic(self):
         self.model_index = 0
 
-        self.sir_classic_label.setVisible(True)
-        self.sir_vitality_label.setVisible(False)
+        # Displaying the name of the model
+        self.model_displayed_label.setText("Model: Classical epidemic SIR model")
 
-        self.vitality_rate_label.setVisible(False)
-        self.vitality_rate_dSpinBox.setVisible(False)
+        # TODO: change the picture
+        if (self.model_incidence == True):
+            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_mass_action.png'))
+        else:
+            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_standard'))
+
+
+        # Hiding the groupBox which contains population dynamic parameters:
+        # \nu - total briths and \mu - mortality rate
+        self.pop_dyn_groupBox.setVisible(False)
+
+        # Hiding population tab on TabWidget
+        self.population_graphpane.isEnabled(False)
    
         self.clear()
     
     def change_model_sir_vitality(self):
         self.model_index = 1
 
-        self.sir_classic_label.setVisible(False)
-        self.sir_vitality_label.setVisible(True)
+        # Displaying the name of the model
+        self.model_displayed_label.setText("Model: Endemic model with population dynamics")
 
-        self.vitality_rate_label.setVisible(True)
-        self.vitality_rate_dSpinBox.setVisible(True)
+        # TODO: change the picture
+        if (self.model_incidence == True):
+            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_mass_action'))
+        else:
+            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_standard'))
+
+
+        # Displaying the groupBox which contains population dynamic parameters
+        self.pop_dyn_groupBox.setVisible(True)
+
+        # Displaying population tab
+        self.population_graphpane.isEnabled(True)
+
 
         self.clear()

@@ -1,6 +1,13 @@
 <RCC>
-  <qresource prefix="Models">
-    <file>resources/images/SIR_classic_epidemic_model.png</file>
-    <file>resources/images/SIR_classic_endemic_model.png</file>
+  <qresource prefix="Classic epidemic model">
+    <file>resources/images/SIR_epidemic_mass_action.png</file>
+    <file>resources/images/SIR_epidemic_standard.png</file>
+  </qresource>
+  <qresource prefix="Endemic model">
+    <file>resources/images/SIR_endemic_mass_action.png</file>
+    <file>resources/images/SIR_endemic_standard.png</file>
+  </qresource>
+  <qresource prefix="Population dynamics">
+    <file>resources/images/Population_dynamics.png</file>
   </qresource>
 </RCC>

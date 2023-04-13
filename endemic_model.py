@@ -18,6 +18,10 @@ class SIR_vitality(SIR_model):
         self.population_data = list()
 
         self.refresh_r0()
+
+        self.instances.append(self)
+
+        print(f'VITALITY: {self.instances}')
     
     # Getter for mortality rate
     @property

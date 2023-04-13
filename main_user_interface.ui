@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>743</height>
+    <width>1037</width>
+    <height>837</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,12 +31,12 @@
      <rect>
       <x>240</x>
       <y>10</y>
-      <width>751</width>
-      <height>681</height>
+      <width>791</width>
+      <height>781</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -47,13 +47,77 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>731</width>
-        <height>631</height>
+        <width>771</width>
+        <height>651</height>
        </rect>
       </property>
       <property name="statusTip">
        <string>Dynamics of compartments S, I and R is displayed here</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="comp_function_display_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>670</y>
+        <width>281</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Choose a function to display</string>
+      </property>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>263</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="comp_graph_layout">
+        <item>
+         <widget class="QCheckBox" name="suseptible_checkBox">
+          <property name="statusTip">
+           <string>Suseptible (S) is a compartment that describes the number of people, who are suseptible to an infection</string>
+          </property>
+          <property name="text">
+           <string>Suseptible</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="infectious_checkBox">
+          <property name="statusTip">
+           <string>Infectious (I) is a compartment that describes the number of people who are, at the time, infected</string>
+          </property>
+          <property name="text">
+           <string>Infectious</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="recovered_checkBox">
+          <property name="statusTip">
+           <string>Recovered (R) compartment describes the number of people who recovered from the infection or dead because of it</string>
+          </property>
+          <property name="text">
+           <string>Recovered</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="phase_graphpane">
@@ -65,8 +129,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>731</width>
-        <height>631</height>
+        <width>771</width>
+        <height>651</height>
        </rect>
       </property>
       <property name="statusTip">
@@ -74,100 +138,94 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="frac_phase_graphpane">
+     <attribute name="title">
+      <string>Fractional phase plane</string>
+     </attribute>
+     <widget class="MPLWidget" name="frac_phase_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>771</width>
+        <height>651</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="population_graphpane">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="title">
+      <string>Population dynamics</string>
+     </attribute>
+     <widget class="MPLWidget" name="population_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>771</width>
+        <height>651</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="population_pixlabel">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>670</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="main_window_resources.qrc">:/Population dynamics/resources/images/Population_dynamics.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
    </widget>
-   <widget class="QLabel" name="sir_classic_label">
+   <widget class="QLabel" name="model_pixlabel">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>221</width>
-      <height>121</height>
+      <y>40</y>
+      <width>220</width>
+      <height>120</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="statusTip">
-     <string>The classic endemic model described in a form of a differential equations system</string>
+     <string>Displays the system of differential equations that defines the model</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="main_window_resources.qrc">:/Models/resources/images/SIR_classic_epidemic_model.png</pixmap>
+     <pixmap resource="main_window_resources.qrc">:/Classic epidemic model/resources/images/SIR_epidemic_mass_action.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QGroupBox" name="function_display_groupBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>500</y>
-      <width>201</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Choose a function to display</string>
-    </property>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>86</width>
-       <height>83</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="function_display_layout">
-      <item>
-       <widget class="QCheckBox" name="suseptible_checkBox">
-        <property name="statusTip">
-         <string>Suseptible (S) is a compartment that describes the number of people, who are suseptible to an infection</string>
-        </property>
-        <property name="text">
-         <string>Suseptible</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="infectious_checkBox">
-        <property name="statusTip">
-         <string>Infectious (I) is a compartment that describes the number of people who are, at the time, infected</string>
-        </property>
-        <property name="text">
-         <string>Infectious</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="recovered_checkBox">
-        <property name="statusTip">
-         <string>Recovered (R) compartment describes the number of people who recovered from the infection or dead because of it</string>
-        </property>
-        <property name="text">
-         <string>Recovered</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>630</y>
-      <width>201</width>
-      <height>58</height>
+      <x>10</x>
+      <y>700</y>
+      <width>221</width>
+      <height>89</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="buttons_layout">
@@ -178,6 +236,13 @@
        </property>
        <property name="text">
         <string>Perform the calculation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="reset_button">
+       <property name="text">
+        <string>Reset to defaults</string>
        </property>
       </widget>
      </item>
@@ -196,9 +261,9 @@
    <widget class="QGroupBox" name="observation_time_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>390</y>
-      <width>201</width>
+      <x>10</x>
+      <y>590</y>
+      <width>221</width>
       <height>71</height>
      </rect>
     </property>
@@ -210,7 +275,7 @@
       <rect>
        <x>9</x>
        <y>30</y>
-       <width>181</width>
+       <width>201</width>
        <height>28</height>
       </rect>
      </property>
@@ -247,9 +312,9 @@
    <widget class="QGroupBox" name="poluation_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>201</width>
+      <x>10</x>
+      <y>260</y>
+      <width>221</width>
       <height>101</height>
      </rect>
     </property>
@@ -261,7 +326,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>180</width>
+       <width>201</width>
        <height>62</height>
       </rect>
      </property>
@@ -303,8 +368,11 @@
           <property name="maximum">
            <number>99999999</number>
           </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
           <property name="value">
-           <number>10000</number>
+           <number>1000000</number>
           </property>
          </widget>
         </item>
@@ -332,9 +400,9 @@
    <widget class="QGroupBox" name="infection_parameters_groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>240</y>
-      <width>201</width>
+      <x>10</x>
+      <y>370</y>
+      <width>221</width>
       <height>101</height>
      </rect>
     </property>
@@ -346,11 +414,11 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>181</width>
-       <height>61</height>
+       <width>201</width>
+       <height>62</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="v_2">
+     <layout class="QHBoxLayout" name="inf_param_layout">
       <item>
        <layout class="QVBoxLayout" name="inf_param_label_layout">
         <item>
@@ -385,8 +453,14 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="decimals">
+           <number>8</number>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
           <property name="value">
-           <double>3.000000000000000</double>
+           <double>0.330000000000000</double>
           </property>
          </widget>
         </item>
@@ -398,8 +472,11 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="decimals">
+           <number>8</number>
+          </property>
           <property name="value">
-           <double>1.000000000000000</double>
+           <double>0.130000000000000</double>
           </property>
          </widget>
         </item>
@@ -411,9 +488,9 @@
    <widget class="QLabel" name="basic_reproduction_number_label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>460</y>
-      <width>191</width>
+      <x>10</x>
+      <y>660</y>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
@@ -421,77 +498,148 @@
      <string>Basic reproduction number:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="sir_vitality_label">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QLabel" name="model_displayed_label">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>13</x>
+      <y>16</y>
       <width>221</width>
-      <height>121</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="main_window_resources.qrc">:/Models/resources/images/SIR_classic_endemic_model.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+     <string>Model: Classical epidemic SIR model</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QGroupBox" name="pop_dyn_groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>350</y>
-      <width>181</width>
-      <height>28</height>
+      <x>10</x>
+      <y>480</y>
+      <width>221</width>
+      <height>101</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="vitality_rate_layout">
-     <property name="spacing">
-      <number>6</number>
+    <property name="title">
+     <string>Population dynamics parameters</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
+       <height>62</height>
+      </rect>
      </property>
-     <item>
-      <widget class="QLabel" name="vitality_rate_label">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="statusTip">
-        <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
-       </property>
-       <property name="text">
-        <string>Vitality rate</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="vitality_rate_dSpinBox">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="value">
-        <double>0.020000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     <layout class="QHBoxLayout" name="pop_dyn_layout">
+      <item>
+       <layout class="QVBoxLayout" name="pop_dyn_label_layout">
+        <item>
+         <widget class="QLabel" name="mortality_rate_label">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="statusTip">
+           <string>Vitality rate (\mu) is the rate of inflow into S, I and R classes (in this model the deaths calance the births)</string>
+          </property>
+          <property name="text">
+           <string>Mortality rate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="total_births_label">
+          <property name="text">
+           <string>Total births</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="pop_dyn_spinBox_layout">
+        <item>
+         <widget class="QDoubleSpinBox" name="mortality_rate_dSpinBox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="decimals">
+           <number>8</number>
+          </property>
+          <property name="value">
+           <double>0.005000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox">
+          <property name="maximum">
+           <number>999999999</number>
+          </property>
+          <property name="value">
+           <number>5000</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="incidence_groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>221</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Choose the incidence</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="incidence_rbutton_layout">
+      <item>
+       <widget class="QRadioButton" name="mass_action_radioButton">
+        <property name="text">
+         <string>Mass action law incidence</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="standard_radioButton">
+        <property name="text">
+         <string>Standard incidence</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -499,7 +647,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1037</width>
      <height>22</height>
     </rect>
    </property>
@@ -517,8 +665,22 @@
     <property name="title">
      <string>Model</string>
     </property>
-    <addaction name="sir_classic_action"/>
-    <addaction name="sir_vitality_action"/>
+    <widget class="QMenu" name="menuClassic_SIR_model">
+     <property name="title">
+      <string>Classic SIR model</string>
+     </property>
+     <addaction name="mass_action_incidence_action"/>
+     <addaction name="standard_incidence_action"/>
+    </widget>
+    <widget class="QMenu" name="menuSIR_model_with_vitality">
+     <property name="title">
+      <string>SIR model with vitality</string>
+     </property>
+     <addaction name="pop_mass_action_incidence_action"/>
+     <addaction name="pop_standard_incidence_action"/>
+    </widget>
+    <addaction name="menuClassic_SIR_model"/>
+    <addaction name="menuSIR_model_with_vitality"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuModel"/>
@@ -556,14 +718,24 @@
     <string>Quit the application</string>
    </property>
   </action>
-  <action name="sir_classic_action">
+  <action name="mass_action_incidence_action">
    <property name="text">
-    <string>Classic SIR model</string>
+    <string>Mass action law incidence</string>
    </property>
   </action>
-  <action name="sir_vitality_action">
+  <action name="standard_incidence_action">
    <property name="text">
-    <string>SIR model with vitality</string>
+    <string>Standard incidence</string>
+   </property>
+  </action>
+  <action name="pop_mass_action_incidence_action">
+   <property name="text">
+    <string>Mass action law incidence</string>
+   </property>
+  </action>
+  <action name="pop_standard_incidence_action">
+   <property name="text">
+    <string>Standard incidence</string>
    </property>
   </action>
  </widget>
