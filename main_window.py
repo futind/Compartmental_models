@@ -3,6 +3,8 @@ from PySide6.QtGui import QPixmap
 
 from ui_main_user_interface import Ui_main_window
 
+from functools import partial
+
 from epidemic_model import SIR_model
 from endemic_model import SIR_vitality
 
@@ -27,13 +29,15 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.reset_action.triggered.connect(self.reset)
         self.quit_action.triggered.connect(self.quit)
 
-        #
-        self.standard_incidence_action.triggered.connect(self.change_model_sir_classic)
-        self.mass_action_incidence_action.triggered.connect(self.change_model_sir_classic)
+        # Use QSignalMapper ???
+        self.standard_incidence_action.triggered.connect(partial(self.change_model_sir_classic, False))
+        self.mass_action_incidence_action.triggered.connect(partial(self.change_model_sir_classic, True))
         
         #
-        self.pop_standard_incidence_action.triggered.connect(self.change_model_sir_vitality)
-        self.pop_mass_action_incidence_action.triggered.connect(self.change_model_sir_vitality)
+        self.pop_standard_incidence_action.triggered.connect(partial(self.change_model_sir_vitality, False))
+        self.pop_mass_action_incidence_action.triggered.connect(partial(self.change_model_sir_vitality, True))
+
+        
 
         # binding checkBox's "state changed" signals to slot, which redraws 
         # the graphics every time. Hopefully, it is a temporary solution.
@@ -42,15 +46,15 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.infectious_checkBox.stateChanged.connect(self.change_graph_visibility)
         self.recovered_checkBox.stateChanged.connect(self.change_graph_visibility)
         
-        self.standard_radioButton.triggered.connect(self.change_incidence_MAI)
-        self.mass_action_radioButton.triggered.connect(self.change_incidence_SI)
+        self.standard_radioButton.toggled.connect(self.change_incidence_SI)
+        self.mass_action_radioButton.toggled.connect(self.change_incidence_MAI)
 
         # creating a model class, so if there is no model instantiated,
         # checkbox's slot wouldn't do anything
         self.model = None
         self.model_incidence = True
         self.model_index = 0
-        self.change_model_sir_classic()
+        self.change_model_sir_classic(True)
 
     # a method which displays graphs
     def draw(self):
@@ -151,52 +155,66 @@ class MainWindow(QMainWindow, Ui_main_window):
     #
     def change_incidence_MAI(self):
         self.model_incidence = True
+
+        self.refresh_picture()
     
     #
     def change_incidence_SI(self):
         self.model_incidence = False
-        
 
-    def change_model_sir_classic(self):
-        self.model_index = 0
-
-        # Displaying the name of the model
-        self.model_displayed_label.setText("Model: Classical epidemic SIR model")
-
-        # TODO: change the picture
-        if (self.model_incidence == True):
-            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_mass_action.png'))
-        else:
-            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_standard'))
-
-
-        # Hiding the groupBox which contains population dynamic parameters:
-        # \nu - total briths and \mu - mortality rate
-        self.pop_dyn_groupBox.setVisible(False)
-
-        # Hiding population tab on TabWidget
-        self.population_graphpane.isEnabled(False)
-   
-        self.clear()
+        self.refresh_picture()
     
-    def change_model_sir_vitality(self):
-        self.model_index = 1
-
-        # Displaying the name of the model
-        self.model_displayed_label.setText("Model: Endemic model with population dynamics")
-
-        # TODO: change the picture
-        if (self.model_incidence == True):
-            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_mass_action'))
+    def refresh_picture(self):
+        if (self.model_index == 0):
+            if (self.model_incidence == True):
+                self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_mass_action.png'))
+            else:
+                self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_epidemic_standard'))
         else:
-            self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_standard'))
+            if (self.model_incidence == True):
+                self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_mass_action'))
+            else:
+                self.model_pixlabel.setPixmap(QPixmap('resources/images/SIR_endemic_standard'))
 
+    def change_model_sir_classic(self, inc: bool):
+        
+        self.model_incidence = inc
 
-        # Displaying the groupBox which contains population dynamic parameters
-        self.pop_dyn_groupBox.setVisible(True)
+        if ( self.model_index != 0 ):
+            self.model_index = 0
 
-        # Displaying population tab
-        self.population_graphpane.isEnabled(True)
+            # Displaying the name of the model
+            self.model_displayed_label.setText("Model: Classical epidemic SIR model")
 
+            # Hiding the groupBox which contains population dynamic parameters:
+            # \nu - total briths and \mu - mortality rate
+            self.pop_dyn_groupBox.setVisible(False)
 
-        self.clear()
+            # Hiding population tab on TabWidget
+            #self.population_graphpane.setEnabled(False)
+   
+            self.clear()
+        
+        # Refreshing the picture
+        self.refresh_picture()
+    
+    def change_model_sir_vitality(self, inc: bool):
+        
+        self.model_incidence = inc
+
+        if (self.model_index != 1):
+            self.model_index = 1
+
+            # Displaying the name of the model
+            self.model_displayed_label.setText("Model: Endemic model with population dynamics")
+
+            # Displaying the groupBox which contains population dynamic parameters
+            self.pop_dyn_groupBox.setVisible(True)
+
+            # Displaying population tab
+            #self.population_graphpane.setEnabled(True)
+
+            self.clear()
+        
+        # Refreshing the picture
+        self.refresh_picture()

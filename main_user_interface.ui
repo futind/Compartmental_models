@@ -67,7 +67,7 @@
       <property name="title">
        <string>Choose a function to display</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -155,7 +155,7 @@
     </widget>
     <widget class="QWidget" name="population_graphpane">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <attribute name="title">
       <string>Population dynamics</string>
@@ -523,7 +523,7 @@
     <property name="title">
      <string>Population dynamics parameters</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -611,7 +611,7 @@
     <property name="title">
      <string>Choose the incidence</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
