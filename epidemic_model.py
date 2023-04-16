@@ -59,12 +59,13 @@ class SIR_model:
         # Adding a created instance into a list of all instances
         SIR_model.instances.append(self)
 
-        print(f'VITALITY: {self.instances}')
+        print(f'CLASSIC: {self.instances}')
     
     # Adding a representation of our class
     def __repr__(self):
         return f'SIR(S = {self.suseptible}, I = {self.infectious}, R ={self.recovered}, ' \
-               f'N = {self.total_population}), beta = {self.contact_rate}, gamma = {self.recovery_rate})'
+               f'N = {self.total_population}, beta = {self.contact_rate}, gamma = {self.recovery_rate}), '\
+               f'T = {self.observation_time})'
     
     # Getter for incidence
     @property
@@ -96,6 +97,11 @@ class SIR_model:
     def suseptible(self):
         return self.__suseptible
     
+    # Getter for suseptible fraction (s)
+    @property
+    def suseptible_fraction(self):
+        return self.__suseptible_fraction
+
     # Setter for suseptible (S)
     @suseptible.setter
     def suseptible(self, S):
@@ -110,7 +116,7 @@ class SIR_model:
     def infectious(self):
         return self.__infectious
     
-    # Getter for infectious fraction
+    # Getter for infectious fraction (i)
     @property
     def infectious_fraction(self):
         return self.__infectious_fraction
@@ -287,7 +293,7 @@ class SIR_model:
         self.infectious_data.append(float(self.infectious))
         self.recovered_data.append(float(self.recovered))
 
-        self.suseptible_fraction_data.append(self.__suseptible_fraction)
+        self.suseptible_fraction_data.append(self.suseptible_fraction)
         self.infectious_fraction_data.append(self.infectious_fraction)
 
         self.time_data.append(time)

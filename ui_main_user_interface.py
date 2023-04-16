@@ -315,12 +315,12 @@ class Ui_main_window(object):
 
         self.pop_dyn_spinBox_layout.addWidget(self.mortality_rate_dSpinBox)
 
-        self.spinBox = QSpinBox(self.layoutWidget5)
-        self.spinBox.setObjectName(u"spinBox")
-        self.spinBox.setMaximum(999999999)
-        self.spinBox.setValue(5000)
+        self.total_births_spinBox = QSpinBox(self.layoutWidget5)
+        self.total_births_spinBox.setObjectName(u"total_births_spinBox")
+        self.total_births_spinBox.setMaximum(999999999)
+        self.total_births_spinBox.setValue(5000)
 
-        self.pop_dyn_spinBox_layout.addWidget(self.spinBox)
+        self.pop_dyn_spinBox_layout.addWidget(self.total_births_spinBox)
 
 
         self.pop_dyn_layout.addLayout(self.pop_dyn_spinBox_layout)

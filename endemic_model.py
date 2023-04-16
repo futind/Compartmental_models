@@ -23,6 +23,11 @@ class SIR_vitality(SIR_model):
 
         print(f'VITALITY: {self.instances}')
     
+    def __repr__(self):
+        return f'SIR_VITALITY(S = {self.suseptible}, I = {self.infectious}, R ={self.recovered}, ' \
+               f'N0 = {self.total_population}, beta = {self.contact_rate}, gamma = {self.recovery_rate}, ' \
+               f'mu = {self.mortality_rate}, nu = {self.total_births}, T = {self.observation_time})'
+
     # Getter for mortality rate
     @property
     def mortality_rate(self):
@@ -164,7 +169,7 @@ class SIR_vitality(SIR_model):
         self.recovered_data.append(float(self.recovered))
         self.population_data.append(float(self.total_population))
 
-        self.suseptible_fraction_data.append(self.__suseptible_fraction)
+        self.suseptible_fraction_data.append(self.suseptible_fraction)
         self.infectious_fraction_data.append(self.infectious_fraction)
 
         self.time_data.append(time)
@@ -173,4 +178,3 @@ class SIR_vitality(SIR_model):
             time += time_step
             self.Runge_Kutta_fourth_order(time_step)
             self.time_data.append(time)
-    
