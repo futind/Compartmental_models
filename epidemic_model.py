@@ -1,6 +1,6 @@
 class SIR_model:
-    # A list, which contains all the instaces of a class
-    instances = []
+
+    # initalization method for classic SIR model
     def __init__(self, incidence: bool, S: int, I: int, R: int, N:int, beta: float, gamma: float, T:int):
 
         # This assertions are preliminary
@@ -17,21 +17,24 @@ class SIR_model:
         self.__mass_action_incidence = incidence
 
         # Total number (N)
-        self.__total_population = N
+        self.__initial_population = N
         
         # Suseptible (S)
-        self.__suseptible = S
-        self.__suseptible_fraction = S/N
+        self.__susceptible = S
+        # Susceptible fraction (s)
+        self.__susceptible_fraction = S/N
 
         # Infectious (I)
         self.__infectious = I
+        # Infectious fraction (i)
         self.__infectious_fraction = I/N
 
         # Recovered (R)
         self.__recovered = R
+        # Recovered fraction (r)
         self.__recovered_fraction = R/N
 
-        # Contact rate (beta)
+        # Contact rate (cbeta)
         self.__contact_rate = beta
         
         # Recovery rate (gamma)
@@ -45,26 +48,19 @@ class SIR_model:
         self.__basic_reproduction_number = self.contact_rate / self.recovery_rate
 
         # Lists that hold the computation data
-        # They are needed so we don't have to compute
-        # every time we want to 
-        self.suseptible_data = list()
+        self.susceptible_data = list()
         self.infectious_data = list()
         self.recovered_data = list()
 
         self.time_data = list()
 
-        self.suseptible_fraction_data = list()
+        self.susceptible_fraction_data = list()
         self.infectious_fraction_data = list()
-        
-        # Adding a created instance into a list of all instances
-        SIR_model.instances.append(self)
 
-        print(f'CLASSIC: {self.instances}')
-    
     # Adding a representation of our class
     def __repr__(self):
-        return f'SIR(S = {self.suseptible}, I = {self.infectious}, R ={self.recovered}, ' \
-               f'N = {self.total_population}, beta = {self.contact_rate}, gamma = {self.recovery_rate}), '\
+        return f'SIR(S = {self.susceptible}, I = {self.infectious}, R ={self.recovered}, ' \
+               f'N = {self.initial_population}, beta = {self.contact_rate}, gamma = {self.recovery_rate}), '\
                f'T = {self.observation_time})'
     
     # Getter for incidence
@@ -77,39 +73,39 @@ class SIR_model:
     def mass_action_incidence(self, incidence: bool):
         self.__mass_action_incidence = incidence
 
-    # Getter for total population (N)
+    # Getter for initial population (N)
     @property
-    def total_population(self):
-        return self.__total_population
+    def initial_population(self):
+        return self.__initial_population
     
-    # Setter for total population (N)
-    @total_population.setter
-    def total_population(self, N):
-        # If total population is less or equal to 0 raising a ValueError
+    # Setter for initial population (N)
+    @initial_population.setter
+    def initial_population(self, N):
+        # If initial population is less or equal to 0 raising a ValueError
         if (N <= 0):
             raise ValueError()
         else:
-            self.__total_population = N
+            self.__initial_population = N
             self.refresh_r0()
     
-    # Getter for suseptible (S)
+    # Getter for susceptible (S)
     @property
-    def suseptible(self):
-        return self.__suseptible
+    def susceptible(self):
+        return self.__susceptible
     
     # Getter for suseptible fraction (s)
     @property
-    def suseptible_fraction(self):
-        return self.__suseptible_fraction
+    def susceptible_fraction(self):
+        return self.__susceptible_fraction
 
     # Setter for suseptible (S)
-    @suseptible.setter
-    def suseptible(self, S):
-        if (S < 0) | (S > self.__total_population):
+    @susceptible.setter
+    def susceptible(self, S):
+        if (S < 0) | (S > self.__initial_population):
             raise ValueError()
         else:
-            self.__suseptible = S
-            self.__suseptible_fraction = self.__suseptible / self.__total_population
+            self.__susceptible = S
+            self.__susceptible_fraction = self.__susceptible / self.__initial_population
 
     # Getter for infectious (I)
     @property
@@ -124,18 +120,18 @@ class SIR_model:
     # Setter for infectious (I)
     @infectious.setter
     def infectious(self, I):
-        if (I < 0) | (I > self.__total_population):
+        if (I < 0) | (I > self.__initial_population):
             raise ValueError()
         else:
             self.__infectious = I
-            self.__infectious_fraction = self.__infectious / self.__total_population
+            self.__infectious_fraction = self.__infectious / self.__initial_population
     
     # Getter for recovered (R)
     @property
     def recovered(self):
         return self.__recovered
     
-    # Getter for recovered fraction
+    # Getter for recovered fraction (r)
     @property
     def recovered_fraction(self):
         return self.__recovered_fraction
@@ -143,11 +139,11 @@ class SIR_model:
     # Setter for recovered (R)
     @recovered.setter
     def recovered(self, R):
-        if (R < 0) | (R > self.__total_population):
+        if (R < 0) | (R > self.__initial_population):
             raise ValueError()
         else:
             self.__recovered = R
-            self.__recovered_fraction = self.__recovered / self.__total_population
+            self.__recovered_fraction = self.__recovered / self.__initial_population
     
     # Getter for contact rate (beta)
     @property
@@ -201,7 +197,7 @@ class SIR_model:
         
         beta = self.contact_rate
         gamma = self.recovery_rate
-        N = self.total_population
+        N = self.initial_population
 
         if (gamma <= 0) | (beta < 0) | (N <= 0):
             raise ValueError()
@@ -212,15 +208,15 @@ class SIR_model:
             self.__basic_reproduction_number = beta / gamma
     
     # All this equations are used in the Runge-Kutta's method, hence the increments
-    # Dynamics equation for suseptible compartment (dS/dt basically)
-    def suseptible_dynamics(self, S_inc = 0.0, I_inc = 0.0):
+    # Dynamics equation for susceptible compartment (dS/dt basically)
+    def susceptible_dynamics(self, S_inc = 0.0, I_inc = 0.0):
         mass_action = self.mass_action_incidence
 
         beta = self.contact_rate
 
-        S = self.suseptible_data[-1] + S_inc
+        S = self.susceptible_data[-1] + S_inc
         I = self.infectious_data[-1] + I_inc
-        N = self.total_population
+        N = self.initial_population
 
         if (mass_action):
             return ( - beta * I * S )
@@ -234,9 +230,9 @@ class SIR_model:
         beta = self.contact_rate
         gamma = self.recovery_rate
 
-        S = self.suseptible_data[-1] + S_inc
+        S = self.susceptible_data[-1] + S_inc
         I = self.infectious_data[-1] + I_inc
-        N = self.total_population
+        N = self.initial_population
 
         if (mass_action):
             return ( beta * I * S - gamma * I )
@@ -244,60 +240,65 @@ class SIR_model:
             return ( beta * I * S / N - gamma * I )
 
     # Dynamics equation for recovered compartment (dR/dt)
-    def recovered_dynamics(self, I_inc = 0.0, R_inc = 0.0):
+    def recovered_dynamics(self, I_inc = 0.0):
         gamma = self.recovery_rate
 
         I = self.infectious_data[-1] + I_inc
 
         return gamma * I
     
+    # The implementation of Runge-Kuttas method for simple SIR system
     def Runge_Kutta_fourth_order(self, increment):
-        s1 = self.suseptible_dynamics()
+        s1 = self.susceptible_dynamics()
         i1 = self.infectious_dynamics()
         r1 = self.recovered_dynamics()
 
-        s2 = self.suseptible_dynamics(increment * s1 / 2.0, increment * i1 / 2.0)
+        s2 = self.susceptible_dynamics(increment * s1 / 2.0, increment * i1 / 2.0)
         i2 = self.infectious_dynamics(increment * s1 / 2.0, increment * i1 / 2.0)
-        r2 = self.recovered_dynamics(increment * i1 / 2.0, increment * r1 / 2.0)
+        r2 = self.recovered_dynamics(increment * i1 / 2.0)
 
-        s3 = self.suseptible_dynamics(increment * s2 / 2.0, increment * i2 / 2.0)
+        s3 = self.susceptible_dynamics(increment * s2 / 2.0, increment * i2 / 2.0)
         i3 = self.infectious_dynamics(increment * s2 / 2.0, increment * i2 / 2.0)
-        r3 = self.recovered_dynamics(increment * i2 / 2.0, increment * r2 / 2.0)
+        r3 = self.recovered_dynamics(increment * i2 / 2.0)
 
-        s4 = self.suseptible_dynamics(increment * s3, increment * i3)
+        s4 = self.susceptible_dynamics(increment * s3, increment * i3)
         i4 = self.infectious_dynamics(increment * s3, increment * i3)
-        r4 = self.recovered_dynamics(increment * i3, increment * r3)
+        r4 = self.recovered_dynamics(increment * i3)
 
-        self.suseptible_data.append(self.suseptible_data[-1] + (increment / 6.0) * (s1 + (2.0 * s2) + (2.0 * s3) + s4))
+        self.susceptible_data.append(self.susceptible_data[-1] + (increment / 6.0) * (s1 + (2.0 * s2) + (2.0 * s3) + s4))
         self.infectious_data.append(self.infectious_data[-1] + (increment / 6.0) * (i1 + (2.0 * i2) + (2.0 * i3) + i4))
         self.recovered_data.append(self.recovered_data[-1] + (increment / 6.0) * (r1 + (2.0 * r2) + (2.0 * r3) + r4))
 
-        self.suseptible_fraction_data.append(self.suseptible_data[-1] / self.total_population)
-        self.infectious_fraction_data.append(self.infectious_data[-1] / self.total_population)
+        self.susceptible_fraction_data.append(self.susceptible_data[-1] / self.initial_population)
+        self.infectious_fraction_data.append(self.infectious_data[-1] / self.initial_population)
     
     # method which actually uses Runge-Kutta's fourth order numerical method
     # for integration 
     def compute(self, time_step: float):
-        self.suseptible_data.clear()
+        # clearing the data lists
+        self.susceptible_data.clear()
         self.infectious_data.clear()
         self.recovered_data.clear()
         
-        self.suseptible_fraction_data.clear()
+        self.susceptible_fraction_data.clear()
         self.infectious_fraction_data.clear()
         
         self.time_data.clear()
 
+        # setting the time to zero
         time = 0.0
 
-        self.suseptible_data.append(float(self.suseptible))
+        # adding the initial data into the data lists
+        self.susceptible_data.append(float(self.susceptible))
         self.infectious_data.append(float(self.infectious))
         self.recovered_data.append(float(self.recovered))
 
-        self.suseptible_fraction_data.append(self.suseptible_fraction)
+        self.susceptible_fraction_data.append(self.susceptible_fraction)
         self.infectious_fraction_data.append(self.infectious_fraction)
 
         self.time_data.append(time)
 
+        # performing the calculation
         while (time <= self.observation_time):
             time += time_step
             self.Runge_Kutta_fourth_order(time_step)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1037</width>
-    <height>837</height>
+    <width>1165</width>
+    <height>936</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,12 +31,12 @@
      <rect>
       <x>240</x>
       <y>10</y>
-      <width>791</width>
-      <height>781</height>
+      <width>921</width>
+      <height>881</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -47,8 +47,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>771</width>
-        <height>651</height>
+        <width>901</width>
+        <height>751</height>
        </rect>
       </property>
       <property name="statusTip">
@@ -58,8 +58,8 @@
      <widget class="QGroupBox" name="comp_function_display_groupBox">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>670</y>
+        <x>300</x>
+        <y>780</y>
         <width>281</width>
         <height>61</height>
        </rect>
@@ -78,7 +78,7 @@
        </property>
        <layout class="QHBoxLayout" name="comp_graph_layout">
         <item>
-         <widget class="QCheckBox" name="suseptible_checkBox">
+         <widget class="QCheckBox" name="susceptible_checkBox">
           <property name="statusTip">
            <string>Suseptible (S) is a compartment that describes the number of people, who are suseptible to an infection</string>
           </property>
@@ -129,8 +129,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>771</width>
-        <height>651</height>
+        <width>901</width>
+        <height>751</height>
        </rect>
       </property>
       <property name="statusTip">
@@ -147,8 +147,8 @@
        <rect>
         <x>9</x>
         <y>9</y>
-        <width>771</width>
-        <height>651</height>
+        <width>901</width>
+        <height>751</height>
        </rect>
       </property>
      </widget>
@@ -165,16 +165,16 @@
        <rect>
         <x>9</x>
         <y>9</y>
-        <width>771</width>
-        <height>651</height>
+        <width>901</width>
+        <height>751</height>
        </rect>
       </property>
      </widget>
      <widget class="QLabel" name="population_pixlabel">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>670</y>
+        <x>370</x>
+        <y>770</y>
         <width>191</width>
         <height>71</height>
        </rect>
@@ -223,7 +223,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>700</y>
+      <y>800</y>
       <width>221</width>
       <height>89</height>
      </rect>
@@ -262,7 +262,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>590</y>
+      <y>690</y>
       <width>221</width>
       <height>71</height>
      </rect>
@@ -281,7 +281,7 @@
      </property>
      <layout class="QHBoxLayout" name="observation_time_layout">
       <item>
-       <widget class="QLabel" name="ovservation_time_label">
+       <widget class="QLabel" name="observation_time_label">
         <property name="statusTip">
          <string>Number of days (T) is the time period in which the population is observed</string>
         </property>
@@ -313,7 +313,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>260</y>
+      <y>360</y>
       <width>221</width>
       <height>101</height>
      </rect>
@@ -401,7 +401,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
+      <y>470</y>
       <width>221</width>
       <height>101</height>
      </rect>
@@ -489,7 +489,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>660</y>
+      <y>760</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -515,7 +515,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>480</y>
+      <y>580</y>
       <width>221</width>
       <height>101</height>
      </rect>
@@ -603,7 +603,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>170</y>
+      <y>260</y>
       <width>221</width>
       <height>91</height>
      </rect>
@@ -623,6 +623,9 @@
      <layout class="QVBoxLayout" name="incidence_rbutton_layout">
       <item>
        <widget class="QRadioButton" name="mass_action_radioButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>Mass action law incidence</string>
         </property>
@@ -633,8 +636,65 @@
       </item>
       <item>
        <widget class="QRadioButton" name="standard_radioButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>Standard incidence</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="model_cloice_groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>221</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Choose the model</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="model_choice_radiobutton_layout">
+      <item>
+       <widget class="QRadioButton" name="classic_sir_radioButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Classic SIR model</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="population_sir_radioButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>SIR model with population</string>
         </property>
        </widget>
       </item>
@@ -647,7 +707,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1037</width>
+     <width>1165</width>
      <height>22</height>
     </rect>
    </property>
