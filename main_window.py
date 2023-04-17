@@ -207,8 +207,8 @@ class MainWindow(QMainWindow, Ui_main_window):
 
         self.dynamics_graph.canvas.draw()
         self.phase_graph.canvas.draw()
-        self.frac_phase_graph.canvas.ax.draw()
-        self.population_graph.canvas.ax.draw()
+        self.frac_phase_graph.canvas.draw()
+        self.population_graph.canvas.draw()
         
         self.basic_reproduction_number_label.setText("Basic reproduction number:")
     
