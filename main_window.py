@@ -2,8 +2,8 @@ from PySide6.QtWidgets import QMainWindow
 from PySide6.QtGui import QPixmap
 
 from functools import partial
-from numpy import arange
-
+import numpy as np
+import math
 from ui_main_user_interface import Ui_main_window
 
 from epidemic_model import SIR_model
@@ -34,7 +34,7 @@ class MainWindow(QMainWindow, Ui_main_window):
 
         self.app = app
        
-        self.change_model(0, True)
+        self.change_model(1, True)
         self.plotting_widget.setCurrentIndex(0)
 
         # binding button's "clicked" signals to slots
@@ -75,6 +75,16 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.susceptible_checkBox.stateChanged.connect(self.change_graph_visibility)
         self.infectious_checkBox.stateChanged.connect(self.change_graph_visibility)
         self.recovered_checkBox.stateChanged.connect(self.change_graph_visibility)
+
+        self.bifurcation_graphs = [self.mu_beta_graph, self.mu_gamma_graph, self.mu_nu_graph, self.beta_gamma_graph, self.beta_nu_graph, self.gamma_nu_graph ,self.only_mu_graph]
+
+        self.mu_beta_radButton.clicked.connect(partial(self.change_bifurcation_graph, 0))
+        self.mu_gamma_radButton.clicked.connect(partial(self.change_bifurcation_graph, 1))
+        self.mu_nu_radButton.clicked.connect(partial(self.change_bifurcation_graph, 2))
+        self.beta_gamma_radButton.clicked.connect(partial(self.change_bifurcation_graph, 3))
+        self.beta_nu_radButton.clicked.connect(partial(self.change_bifurcation_graph, 4))
+        self.gamma_nu_radButton.clicked.connect(partial(self.change_bifurcation_graph, 5))
+        self.only_mu_radButton.clicked.connect(partial(self.change_bifurcation_graph, 6))
 
     # drawing a main dynamics graph
     def comparmental_graph_draw(self):
@@ -117,7 +127,7 @@ class MainWindow(QMainWindow, Ui_main_window):
 
         # displaying a phase graph in fractions
         self.frac_phase_graph.canvas.ax.plot(self.model.susceptible_fraction_data, self.model.infectious_fraction_data, label = 'i(s)')
-        self.frac_phase_graph.canvas.ax.plot(arange(0, 1, 0.001), arange(1, 0, -0.001))
+        self.frac_phase_graph.canvas.ax.plot(np.arange(0, 1, 0.001), np.arange(1, 0, -0.001))
 
         # creating a legend on both axis
         self.frac_phase_graph.canvas.ax.legend()
@@ -142,12 +152,257 @@ class MainWindow(QMainWindow, Ui_main_window):
         # actually displaying the changes made to the axis
         self.population_graph.canvas.draw()
 
+    def change_bifurcation_graph(self, index):
+        for widget in self.bifurcation_graphs:
+            widget.hide()
+        self.bifurcation_graphs[index].show()
+
+    def mu_beta_bifuraction_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        beta_end = 1.5 * ( (self.recovery_rate + 1)/self.total_births )
+        r0 = []
+        MU = np.linspace(0.00000001, 1, num = 200, endpoint = True)
+
+        for i in MU:
+            r0.append( i*(self.recovery_rate + i)/self.total_births )
+            x = 0.00000001
+            h = beta_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(x, self.model.recovery_rate, i, self.model.total_births)
+            while (x < beta_end):
+                self.mu_beta_graph.canvas.ax.plot(i, x, color = stability_prev, marker = '.')
+                if ((bifurcation_flag) & (h < beta_end / 200)):
+                    h = h * 2
+                stability_new = self.model.Stability(x + h, self.model.recovery_rate, i, self.model.total_births)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(x + h, self.model.recovery_rate, i, self.model.total_births)
+                x = x + h
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                stability_prev = stability_new
+        
+        self.mu_beta_graph.canvas.ax.plot(MU, r0, color = 'yellow')
+
+    def mu_gamma_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        mu_end = 1.5 * ( math.sqrt(self.contact_rate * self.total_births) )
+        
+        r0 = []
+        GAMMA = np.linspace(0.00000001, 1, num = 200, endpoint = True)
+
+        for g in GAMMA:
+            
+            x = 0.00000001
+            h = mu_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(self.contact_rate, g, x, self.model.total_births)
+            r0.append( (- g + math.sqrt(g**2 + 4*self.contact_rate*self.total_births))/2 )
+
+            while (x < mu_end):
+                self.mu_gamma_graph.canvas.ax.plot(x, g, color = stability_prev, marker = '.')
+                if ((bifurcation_flag) & (h < mu_end / 200)):
+                    h = h * 2
+                stability_new = self.model.Stability(self.contact_rate, g, x + h, self.model.total_births)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(self.contact_rate, g, x + h, self.model.total_births)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                    
+                x = x + h
+                stability_prev = stability_new
+        
+        self.mu_gamma_graph.canvas.ax.plot(r0, GAMMA, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+    def mu_nu_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        mu_end = min(5 * ( (-self.recovery_rate + math.sqrt(self.recovery_rate**2 + 4*self.contact_rate*self.total_births)) ),1)
+        
+        r0 = []
+        NU = np.linspace(0.00000001, self.total_births * 2, num = 200, endpoint = False)
+
+        for n in NU:
+            
+            x = 0.00000001
+            h = mu_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(self.contact_rate, self.recovery_rate, x, n)
+            r0.append( (- self.recovery_rate + math.sqrt(self.recovery_rate**2 + 4*self.contact_rate*n))/2 )
+
+            while (x < mu_end):
+                self.mu_nu_graph.canvas.ax.plot(x, n, color = stability_prev, marker = '.')
+                if ((bifurcation_flag) & (h < mu_end / 200)):
+                    h = h * 2
+                stability_new = self.model.Stability(self.contact_rate, self.recovery_rate, x + h, n)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(self.contact_rate, self.recovery_rate, x + h, n)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                    
+                x = x + h
+                stability_prev = stability_new
+        
+        self.mu_nu_graph.canvas.ax.plot(r0, NU, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+    def beta_gamma_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        r0_start = (self.mortality_rate**2)/self.total_births
+        beta_end = 1.5 * (self.mortality_rate**2 + self.mortality_rate)/self.total_births
+
+        r0 = []
+        GAMMA = np.linspace(0.00000001, 1, num = 200, endpoint = True)
+
+        for g in GAMMA:
+            x = 0.00000001
+            h = beta_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(x, g, self.mortality_rate, self.total_births)
+            if (x > r0_start):
+                r0.append( (self.mortality_rate**2 + g*self.mortality_rate)/self.total_births )
+
+            while (x < beta_end):
+                self.beta_gamma_graph.canvas.ax.plot(x, g, color = stability_prev, marker = '.')
+                
+                if ((bifurcation_flag) & (h < beta_end/200)):
+                    h = h * 2
+                stability_new = self.model.Stability(x + h, g, self.mortality_rate, self.total_births)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(x + h, g, self.mortality_rate, self.total_births)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                    
+                x = x + h
+                stability_prev = stability_new
+        
+        self.beta_gamma_graph.canvas.ax.plot(r0, GAMMA, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+    def beta_nu_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        r0_start = self.mortality_rate*(self.mortality_rate + self.recovery_rate)/(2*self.total_births)
+        beta_end = 5 * self.contact_rate
+        NU = np.linspace(0.00000001, 2*self.total_births, num = 200, endpoint = True)
+        r0 = []
+
+        for n in NU:
+            x = 0.00000001
+            h = beta_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(x, self.recovery_rate, self.mortality_rate, n)
+            if (x > r0_start):
+                r0.append( self.mortality_rate*(self.mortality_rate + self.recovery_rate)/n )
+
+            while (x < beta_end):
+                self.beta_nu_graph.canvas.ax.plot(x, n, color = stability_prev, marker = '.')
+                
+                if ((bifurcation_flag) & (h < beta_end/200)):
+                    h = h * 2
+                stability_new = self.model.Stability(x + h, self.recovery_rate, self.mortality_rate, n)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(x + h, self.recovery_rate, self.mortality_rate, n)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                    
+                x = x + h
+                stability_prev = stability_new
+        
+        betas_r = np.linspace(r0_start, beta_end, num = 200)
+        r0new = []
+        for b in betas_r:
+            r0new.append( self.mortality_rate*(self.mortality_rate + self.recovery_rate)/b )
+        self.beta_nu_graph.canvas.ax.plot(betas_r, r0new, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+    def gamma_nu_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        nu_end = 1.2 * (self.mortality_rate**2 + self.mortality_rate)/self.contact_rate
+        
+        r0 = []
+        GAMMA = np.linspace(0.00000001, 1, num = 200, endpoint = False)
+
+        for g in GAMMA:
+            
+            x = 0.00000001
+            h = nu_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(self.contact_rate, g, self.mortality_rate, x)
+            r0.append( self.mortality_rate*(self.mortality_rate + g)/self.contact_rate )
+
+            while (x < nu_end):
+                self.gamma_nu_graph.canvas.ax.plot(g, x, color = stability_prev, marker = '.')
+                if ((bifurcation_flag) & (h < nu_end / 200)):
+                    h = h * 2
+                stability_new = self.model.Stability(self.contact_rate, g, self.mortality_rate, x + h)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(self.contact_rate, g, self.mortality_rate, x + h)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                    
+                x = x + h
+                stability_prev = stability_new
+        
+        self.gamma_nu_graph.canvas.ax.plot(GAMMA, r0, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+    def only_mu_bifurcation_draw(self):
+        if (self.model_index == 0):
+            return
+        
+        mu_end = (min(1, 6 * ( - self.recovery_rate + math.sqrt(self.recovery_rate**2 + 4*self.contact_rate*self.total_births) )/2))
+        Y = np.linspace(0.00000001, 1.1 * (2*self.total_births) / (-self.recovery_rate + math.sqrt(self.recovery_rate**2 + 4*self.contact_rate*self.total_births)), num = 200)
+        r0 = []
+        for y in Y:
+            x = 0.00000001
+            h = mu_end / 200
+            bifurcation_flag = False
+            stability_prev = self.model.Stability(self.contact_rate, self.recovery_rate, x, self.total_births)
+            r0.append( ( - self.recovery_rate + math.sqrt(self.recovery_rate**2 + 4*self.contact_rate*self.total_births) )/2 )
+
+            while (x < mu_end):
+                self.only_mu_graph.canvas.ax.plot(x, y, color = stability_prev, marker = '.')
+                if ((bifurcation_flag) & (h < mu_end / 200)):
+                    h = h * 2
+                stability_new = self.model.Stability(self.contact_rate, self.recovery_rate, x + h, self.total_births)
+                while ((not bifurcation_flag) & (stability_prev != stability_new) & (h > 0.000000001)):
+                    h = h / 2
+                    stability_new = self.model.Stability(self.contact_rate, self.recovery_rate, x + h, self.total_births)
+                if (stability_prev != stability_new):
+                    bifurcation_flag = True
+                
+                x = x + h
+                stability_prev = stability_new
+        
+        self.only_mu_graph.canvas.ax.plot(r0, Y, color = 'yellow', markeredgecolor = 'yellow', linewidth = 1)
+
+
     # a method which displays graphs
     def draw(self):
         self.comparmental_graph_draw()
         self.phase_graph_draw()
         self.frac_phase_graph_draw()
         self.population_graph_draw()
+
+        self.mu_beta_bifuraction_draw()
+        self.mu_gamma_bifurcation_draw()
+        self.mu_nu_bifurcation_draw()
+        self.beta_gamma_bifurcation_draw()
+        self.beta_nu_bifurcation_draw()
+        self.gamma_nu_bifurcation_draw()
+        self.only_mu_bifurcation_draw()
         
     # this method is used to create a model's class, to perform the calculation, and to draw the graphs
     def perform(self):
@@ -205,11 +460,21 @@ class MainWindow(QMainWindow, Ui_main_window):
         self.frac_phase_graph.canvas.ax.clear()
         self.population_graph.canvas.ax.clear()
 
+        self.mu_beta_graph.canvas.ax.clear()
+
         self.dynamics_graph.canvas.draw()
         self.phase_graph.canvas.draw()
         self.frac_phase_graph.canvas.draw()
         self.population_graph.canvas.draw()
-        
+
+        self.mu_beta_graph.canvas.ax.clear()
+        self.mu_gamma_graph.canvas.ax.clear()
+        self.mu_nu_graph.canvas.ax.clear()
+        self.beta_gamma_graph.canvas.ax.clear()
+        self.beta_nu_graph.canvas.ax.clear()
+        self.gamma_nu_graph.canvas.ax.clear()
+        self.only_mu_graph.canvas.ax.clear()
+
         self.basic_reproduction_number_label.setText("Basic reproduction number:")
     
     # TODO: reset to default values for the model+incidence
@@ -218,8 +483,8 @@ class MainWindow(QMainWindow, Ui_main_window):
         # TODO: make csv lists
         self.initial_population = self.population_size_spinBox.setValue(1000000)
         self.infectious = self.infections_size_spinBox.setValue(1)
-        self.contact_rate = self.contact_rate_dSpinBox.setValue(0.33)
-        self.recovery_rate = self.recovery_rate_dSpinBox.setValue(0.13)
+        self.contact_rate = self.contact_rate_dSpinBox.setValue(0.00000028)
+        self.recovery_rate = self.recovery_rate_dSpinBox.setValue(0.2)
         self.observation_time = self.observation_time_spinBox.setValue(365)
 
         self.clear()

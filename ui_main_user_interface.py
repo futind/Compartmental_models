@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_user_interface.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.0
+## Created by: Qt User Interface Compiler version 6.5.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -57,6 +57,7 @@ class Ui_main_window(object):
         self.plotting_widget = QTabWidget(self.central_widget)
         self.plotting_widget.setObjectName(u"plotting_widget")
         self.plotting_widget.setGeometry(QRect(240, 10, 921, 881))
+        self.plotting_widget.setElideMode(Qt.ElideLeft)
         self.dynamics_graphpane = QWidget()
         self.dynamics_graphpane.setObjectName(u"dynamics_graphpane")
         self.dynamics_graph = MPLWidget(self.dynamics_graphpane)
@@ -114,6 +115,115 @@ class Ui_main_window(object):
         self.population_pixlabel.setPixmap(QPixmap(u":/Population dynamics/resources/images/Population_dynamics.png"))
         self.population_pixlabel.setScaledContents(True)
         self.plotting_widget.addTab(self.population_graphpane, "")
+        self.bifurcation_graphpane = QWidget()
+        self.bifurcation_graphpane.setObjectName(u"bifurcation_graphpane")
+        self.mu_beta_graph = MPLWidget(self.bifurcation_graphpane)
+        self.mu_beta_graph.setObjectName(u"mu_beta_graph")
+        self.mu_beta_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.mu_gamma_graph = MPLWidget(self.bifurcation_graphpane)
+        self.mu_gamma_graph.setObjectName(u"mu_gamma_graph")
+        self.mu_gamma_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.mu_nu_graph = MPLWidget(self.bifurcation_graphpane)
+        self.mu_nu_graph.setObjectName(u"mu_nu_graph")
+        self.mu_nu_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.beta_gamma_graph = MPLWidget(self.bifurcation_graphpane)
+        self.beta_gamma_graph.setObjectName(u"beta_gamma_graph")
+        self.beta_gamma_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.bifuraction_radiobuttons = QGroupBox(self.bifurcation_graphpane)
+        self.bifuraction_radiobuttons.setObjectName(u"bifuraction_radiobuttons")
+        self.bifuraction_radiobuttons.setGeometry(QRect(10, 720, 861, 121))
+        self.layoutWidget1 = QWidget(self.bifuraction_radiobuttons)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(160, 10, 523, 111))
+        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget1)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.mu_beta_radButton = QRadioButton(self.layoutWidget1)
+        self.mu_beta_radButton.setObjectName(u"mu_beta_radButton")
+
+        self.verticalLayout.addWidget(self.mu_beta_radButton)
+
+        self.mu_gamma_radButton = QRadioButton(self.layoutWidget1)
+        self.mu_gamma_radButton.setObjectName(u"mu_gamma_radButton")
+
+        self.verticalLayout.addWidget(self.mu_gamma_radButton)
+
+        self.mu_nu_radButton = QRadioButton(self.layoutWidget1)
+        self.mu_nu_radButton.setObjectName(u"mu_nu_radButton")
+
+        self.verticalLayout.addWidget(self.mu_nu_radButton)
+
+
+        self.horizontalLayout_2.addLayout(self.verticalLayout)
+
+        self.verticalLayout_2 = QVBoxLayout()
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.beta_gamma_radButton = QRadioButton(self.layoutWidget1)
+        self.beta_gamma_radButton.setObjectName(u"beta_gamma_radButton")
+
+        self.verticalLayout_2.addWidget(self.beta_gamma_radButton)
+
+        self.beta_nu_radButton = QRadioButton(self.layoutWidget1)
+        self.beta_nu_radButton.setObjectName(u"beta_nu_radButton")
+
+        self.verticalLayout_2.addWidget(self.beta_nu_radButton)
+
+        self.gamma_nu_radButton = QRadioButton(self.layoutWidget1)
+        self.gamma_nu_radButton.setObjectName(u"gamma_nu_radButton")
+
+        self.verticalLayout_2.addWidget(self.gamma_nu_radButton)
+
+
+        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.only_mu_radButton = QRadioButton(self.layoutWidget1)
+        self.only_mu_radButton.setObjectName(u"only_mu_radButton")
+
+        self.horizontalLayout.addWidget(self.only_mu_radButton)
+
+        self.groupBox = QGroupBox(self.layoutWidget1)
+        self.groupBox.setObjectName(u"groupBox")
+        self.layoutWidget2 = QWidget(self.groupBox)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(10, 20, 85, 74))
+        self.verticalLayout_3 = QVBoxLayout(self.layoutWidget2)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.bif_sus_checkBox = QCheckBox(self.layoutWidget2)
+        self.bif_sus_checkBox.setObjectName(u"bif_sus_checkBox")
+
+        self.verticalLayout_3.addWidget(self.bif_sus_checkBox)
+
+        self.bif_inf_checkBox = QCheckBox(self.layoutWidget2)
+        self.bif_inf_checkBox.setObjectName(u"bif_inf_checkBox")
+
+        self.verticalLayout_3.addWidget(self.bif_inf_checkBox)
+
+        self.bif_rec_checkBox = QCheckBox(self.layoutWidget2)
+        self.bif_rec_checkBox.setObjectName(u"bif_rec_checkBox")
+
+        self.verticalLayout_3.addWidget(self.bif_rec_checkBox)
+
+
+        self.horizontalLayout.addWidget(self.groupBox)
+
+
+        self.horizontalLayout_2.addLayout(self.horizontalLayout)
+
+        self.only_mu_graph = MPLWidget(self.bifurcation_graphpane)
+        self.only_mu_graph.setObjectName(u"only_mu_graph")
+        self.only_mu_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.beta_nu_graph = MPLWidget(self.bifurcation_graphpane)
+        self.beta_nu_graph.setObjectName(u"beta_nu_graph")
+        self.beta_nu_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.gamma_nu_graph = MPLWidget(self.bifurcation_graphpane)
+        self.gamma_nu_graph.setObjectName(u"gamma_nu_graph")
+        self.gamma_nu_graph.setGeometry(QRect(9, 9, 861, 701))
+        self.plotting_widget.addTab(self.bifurcation_graphpane, "")
         self.model_pixlabel = QLabel(self.central_widget)
         self.model_pixlabel.setObjectName(u"model_pixlabel")
         self.model_pixlabel.setGeometry(QRect(10, 40, 220, 120))
@@ -121,23 +231,23 @@ class Ui_main_window(object):
         self.model_pixlabel.setSizePolicy(sizePolicy)
         self.model_pixlabel.setPixmap(QPixmap(u":/Classic epidemic model/resources/images/SIR_epidemic_mass_action.png"))
         self.model_pixlabel.setScaledContents(True)
-        self.layoutWidget1 = QWidget(self.central_widget)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(10, 800, 221, 89))
-        self.buttons_layout = QVBoxLayout(self.layoutWidget1)
+        self.layoutWidget3 = QWidget(self.central_widget)
+        self.layoutWidget3.setObjectName(u"layoutWidget3")
+        self.layoutWidget3.setGeometry(QRect(10, 800, 221, 89))
+        self.buttons_layout = QVBoxLayout(self.layoutWidget3)
         self.buttons_layout.setObjectName(u"buttons_layout")
         self.buttons_layout.setContentsMargins(0, 0, 0, 0)
-        self.perform_button = QPushButton(self.layoutWidget1)
+        self.perform_button = QPushButton(self.layoutWidget3)
         self.perform_button.setObjectName(u"perform_button")
 
         self.buttons_layout.addWidget(self.perform_button)
 
-        self.reset_button = QPushButton(self.layoutWidget1)
+        self.reset_button = QPushButton(self.layoutWidget3)
         self.reset_button.setObjectName(u"reset_button")
 
         self.buttons_layout.addWidget(self.reset_button)
 
-        self.clear_button = QPushButton(self.layoutWidget1)
+        self.clear_button = QPushButton(self.layoutWidget3)
         self.clear_button.setObjectName(u"clear_button")
 
         self.buttons_layout.addWidget(self.clear_button)
@@ -145,18 +255,18 @@ class Ui_main_window(object):
         self.observation_time_groupBox = QGroupBox(self.central_widget)
         self.observation_time_groupBox.setObjectName(u"observation_time_groupBox")
         self.observation_time_groupBox.setGeometry(QRect(10, 690, 221, 71))
-        self.layoutWidget2 = QWidget(self.observation_time_groupBox)
-        self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(9, 30, 201, 28))
-        self.observation_time_layout = QHBoxLayout(self.layoutWidget2)
+        self.layoutWidget4 = QWidget(self.observation_time_groupBox)
+        self.layoutWidget4.setObjectName(u"layoutWidget4")
+        self.layoutWidget4.setGeometry(QRect(9, 30, 201, 28))
+        self.observation_time_layout = QHBoxLayout(self.layoutWidget4)
         self.observation_time_layout.setObjectName(u"observation_time_layout")
         self.observation_time_layout.setContentsMargins(0, 0, 0, 0)
-        self.observation_time_label = QLabel(self.layoutWidget2)
+        self.observation_time_label = QLabel(self.layoutWidget4)
         self.observation_time_label.setObjectName(u"observation_time_label")
 
         self.observation_time_layout.addWidget(self.observation_time_label)
 
-        self.observation_time_spinBox = QSpinBox(self.layoutWidget2)
+        self.observation_time_spinBox = QSpinBox(self.layoutWidget4)
         self.observation_time_spinBox.setObjectName(u"observation_time_spinBox")
         sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
@@ -164,27 +274,27 @@ class Ui_main_window(object):
         sizePolicy1.setHeightForWidth(self.observation_time_spinBox.sizePolicy().hasHeightForWidth())
         self.observation_time_spinBox.setSizePolicy(sizePolicy1)
         self.observation_time_spinBox.setMaximum(9999999)
-        self.observation_time_spinBox.setValue(365)
+        self.observation_time_spinBox.setValue(2000)
 
         self.observation_time_layout.addWidget(self.observation_time_spinBox)
 
         self.poluation_groupBox = QGroupBox(self.central_widget)
         self.poluation_groupBox.setObjectName(u"poluation_groupBox")
         self.poluation_groupBox.setGeometry(QRect(10, 360, 221, 101))
-        self.layoutWidget3 = QWidget(self.poluation_groupBox)
-        self.layoutWidget3.setObjectName(u"layoutWidget3")
-        self.layoutWidget3.setGeometry(QRect(10, 30, 201, 62))
-        self.population_params_layout = QHBoxLayout(self.layoutWidget3)
+        self.layoutWidget5 = QWidget(self.poluation_groupBox)
+        self.layoutWidget5.setObjectName(u"layoutWidget5")
+        self.layoutWidget5.setGeometry(QRect(10, 30, 201, 62))
+        self.population_params_layout = QHBoxLayout(self.layoutWidget5)
         self.population_params_layout.setObjectName(u"population_params_layout")
         self.population_params_layout.setContentsMargins(0, 0, 0, 0)
         self.pop_params_label_layout = QVBoxLayout()
         self.pop_params_label_layout.setObjectName(u"pop_params_label_layout")
-        self.population_size_label = QLabel(self.layoutWidget3)
+        self.population_size_label = QLabel(self.layoutWidget5)
         self.population_size_label.setObjectName(u"population_size_label")
 
         self.pop_params_label_layout.addWidget(self.population_size_label)
 
-        self.infectious_size_label = QLabel(self.layoutWidget3)
+        self.infectious_size_label = QLabel(self.layoutWidget5)
         self.infectious_size_label.setObjectName(u"infectious_size_label")
 
         self.pop_params_label_layout.addWidget(self.infectious_size_label)
@@ -194,7 +304,7 @@ class Ui_main_window(object):
 
         self.pop_params_spinBox_layout = QVBoxLayout()
         self.pop_params_spinBox_layout.setObjectName(u"pop_params_spinBox_layout")
-        self.population_size_spinBox = QSpinBox(self.layoutWidget3)
+        self.population_size_spinBox = QSpinBox(self.layoutWidget5)
         self.population_size_spinBox.setObjectName(u"population_size_spinBox")
         sizePolicy1.setHeightForWidth(self.population_size_spinBox.sizePolicy().hasHeightForWidth())
         self.population_size_spinBox.setSizePolicy(sizePolicy1)
@@ -204,7 +314,7 @@ class Ui_main_window(object):
 
         self.pop_params_spinBox_layout.addWidget(self.population_size_spinBox)
 
-        self.infections_size_spinBox = QSpinBox(self.layoutWidget3)
+        self.infections_size_spinBox = QSpinBox(self.layoutWidget5)
         self.infections_size_spinBox.setObjectName(u"infections_size_spinBox")
         sizePolicy1.setHeightForWidth(self.infections_size_spinBox.sizePolicy().hasHeightForWidth())
         self.infections_size_spinBox.setSizePolicy(sizePolicy1)
@@ -219,20 +329,20 @@ class Ui_main_window(object):
         self.infection_parameters_groupBox = QGroupBox(self.central_widget)
         self.infection_parameters_groupBox.setObjectName(u"infection_parameters_groupBox")
         self.infection_parameters_groupBox.setGeometry(QRect(10, 470, 221, 101))
-        self.layoutWidget4 = QWidget(self.infection_parameters_groupBox)
-        self.layoutWidget4.setObjectName(u"layoutWidget4")
-        self.layoutWidget4.setGeometry(QRect(10, 30, 201, 62))
-        self.inf_param_layout = QHBoxLayout(self.layoutWidget4)
+        self.layoutWidget6 = QWidget(self.infection_parameters_groupBox)
+        self.layoutWidget6.setObjectName(u"layoutWidget6")
+        self.layoutWidget6.setGeometry(QRect(10, 30, 201, 62))
+        self.inf_param_layout = QHBoxLayout(self.layoutWidget6)
         self.inf_param_layout.setObjectName(u"inf_param_layout")
         self.inf_param_layout.setContentsMargins(0, 0, 0, 0)
         self.inf_param_label_layout = QVBoxLayout()
         self.inf_param_label_layout.setObjectName(u"inf_param_label_layout")
-        self.contact_rate_label = QLabel(self.layoutWidget4)
+        self.contact_rate_label = QLabel(self.layoutWidget6)
         self.contact_rate_label.setObjectName(u"contact_rate_label")
 
         self.inf_param_label_layout.addWidget(self.contact_rate_label)
 
-        self.recovery_rate_label = QLabel(self.layoutWidget4)
+        self.recovery_rate_label = QLabel(self.layoutWidget6)
         self.recovery_rate_label.setObjectName(u"recovery_rate_label")
 
         self.inf_param_label_layout.addWidget(self.recovery_rate_label)
@@ -242,22 +352,24 @@ class Ui_main_window(object):
 
         self.inf_param_dspinBox_layout = QVBoxLayout()
         self.inf_param_dspinBox_layout.setObjectName(u"inf_param_dspinBox_layout")
-        self.contact_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget4)
+        self.contact_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget6)
         self.contact_rate_dSpinBox.setObjectName(u"contact_rate_dSpinBox")
         sizePolicy1.setHeightForWidth(self.contact_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.contact_rate_dSpinBox.setSizePolicy(sizePolicy1)
         self.contact_rate_dSpinBox.setDecimals(8)
-        self.contact_rate_dSpinBox.setSingleStep(0.010000000000000)
-        self.contact_rate_dSpinBox.setValue(0.330000000000000)
+        self.contact_rate_dSpinBox.setSingleStep(0.000001000000000)
+        self.contact_rate_dSpinBox.setValue(0.000001000000000)
 
         self.inf_param_dspinBox_layout.addWidget(self.contact_rate_dSpinBox)
 
-        self.recovery_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget4)
+        self.recovery_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget6)
         self.recovery_rate_dSpinBox.setObjectName(u"recovery_rate_dSpinBox")
         sizePolicy1.setHeightForWidth(self.recovery_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.recovery_rate_dSpinBox.setSizePolicy(sizePolicy1)
         self.recovery_rate_dSpinBox.setDecimals(8)
-        self.recovery_rate_dSpinBox.setValue(0.130000000000000)
+        self.recovery_rate_dSpinBox.setMaximum(1.000000000000000)
+        self.recovery_rate_dSpinBox.setSingleStep(0.010000000000000)
+        self.recovery_rate_dSpinBox.setValue(0.200000000000000)
 
         self.inf_param_dspinBox_layout.addWidget(self.recovery_rate_dSpinBox)
 
@@ -273,15 +385,15 @@ class Ui_main_window(object):
         self.pop_dyn_groupBox = QGroupBox(self.central_widget)
         self.pop_dyn_groupBox.setObjectName(u"pop_dyn_groupBox")
         self.pop_dyn_groupBox.setGeometry(QRect(10, 580, 221, 101))
-        self.layoutWidget5 = QWidget(self.pop_dyn_groupBox)
-        self.layoutWidget5.setObjectName(u"layoutWidget5")
-        self.layoutWidget5.setGeometry(QRect(10, 30, 201, 62))
-        self.pop_dyn_layout = QHBoxLayout(self.layoutWidget5)
+        self.layoutWidget7 = QWidget(self.pop_dyn_groupBox)
+        self.layoutWidget7.setObjectName(u"layoutWidget7")
+        self.layoutWidget7.setGeometry(QRect(10, 30, 201, 62))
+        self.pop_dyn_layout = QHBoxLayout(self.layoutWidget7)
         self.pop_dyn_layout.setObjectName(u"pop_dyn_layout")
         self.pop_dyn_layout.setContentsMargins(0, 0, 0, 0)
         self.pop_dyn_label_layout = QVBoxLayout()
         self.pop_dyn_label_layout.setObjectName(u"pop_dyn_label_layout")
-        self.mortality_rate_label = QLabel(self.layoutWidget5)
+        self.mortality_rate_label = QLabel(self.layoutWidget7)
         self.mortality_rate_label.setObjectName(u"mortality_rate_label")
         self.mortality_rate_label.setEnabled(True)
         sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
@@ -292,7 +404,7 @@ class Ui_main_window(object):
 
         self.pop_dyn_label_layout.addWidget(self.mortality_rate_label)
 
-        self.total_births_label = QLabel(self.layoutWidget5)
+        self.total_births_label = QLabel(self.layoutWidget7)
         self.total_births_label.setObjectName(u"total_births_label")
 
         self.pop_dyn_label_layout.addWidget(self.total_births_label)
@@ -302,7 +414,7 @@ class Ui_main_window(object):
 
         self.pop_dyn_spinBox_layout = QVBoxLayout()
         self.pop_dyn_spinBox_layout.setObjectName(u"pop_dyn_spinBox_layout")
-        self.mortality_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget5)
+        self.mortality_rate_dSpinBox = QDoubleSpinBox(self.layoutWidget7)
         self.mortality_rate_dSpinBox.setObjectName(u"mortality_rate_dSpinBox")
         self.mortality_rate_dSpinBox.setEnabled(True)
         sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
@@ -311,13 +423,16 @@ class Ui_main_window(object):
         sizePolicy3.setHeightForWidth(self.mortality_rate_dSpinBox.sizePolicy().hasHeightForWidth())
         self.mortality_rate_dSpinBox.setSizePolicy(sizePolicy3)
         self.mortality_rate_dSpinBox.setDecimals(8)
+        self.mortality_rate_dSpinBox.setMaximum(1.000000000000000)
+        self.mortality_rate_dSpinBox.setSingleStep(0.001000000000000)
         self.mortality_rate_dSpinBox.setValue(0.005000000000000)
 
         self.pop_dyn_spinBox_layout.addWidget(self.mortality_rate_dSpinBox)
 
-        self.total_births_spinBox = QSpinBox(self.layoutWidget5)
+        self.total_births_spinBox = QSpinBox(self.layoutWidget7)
         self.total_births_spinBox.setObjectName(u"total_births_spinBox")
-        self.total_births_spinBox.setMaximum(999999999)
+        self.total_births_spinBox.setMaximum(100000)
+        self.total_births_spinBox.setSingleStep(500)
         self.total_births_spinBox.setValue(5000)
 
         self.pop_dyn_spinBox_layout.addWidget(self.total_births_spinBox)
@@ -328,20 +443,20 @@ class Ui_main_window(object):
         self.incidence_groupBox = QGroupBox(self.central_widget)
         self.incidence_groupBox.setObjectName(u"incidence_groupBox")
         self.incidence_groupBox.setGeometry(QRect(10, 260, 221, 91))
-        self.layoutWidget6 = QWidget(self.incidence_groupBox)
-        self.layoutWidget6.setObjectName(u"layoutWidget6")
-        self.layoutWidget6.setGeometry(QRect(10, 30, 201, 54))
-        self.incidence_rbutton_layout = QVBoxLayout(self.layoutWidget6)
+        self.layoutWidget8 = QWidget(self.incidence_groupBox)
+        self.layoutWidget8.setObjectName(u"layoutWidget8")
+        self.layoutWidget8.setGeometry(QRect(10, 30, 201, 54))
+        self.incidence_rbutton_layout = QVBoxLayout(self.layoutWidget8)
         self.incidence_rbutton_layout.setObjectName(u"incidence_rbutton_layout")
         self.incidence_rbutton_layout.setContentsMargins(0, 0, 0, 0)
-        self.mass_action_radioButton = QRadioButton(self.layoutWidget6)
+        self.mass_action_radioButton = QRadioButton(self.layoutWidget8)
         self.mass_action_radioButton.setObjectName(u"mass_action_radioButton")
         self.mass_action_radioButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.mass_action_radioButton.setChecked(True)
 
         self.incidence_rbutton_layout.addWidget(self.mass_action_radioButton)
 
-        self.standard_radioButton = QRadioButton(self.layoutWidget6)
+        self.standard_radioButton = QRadioButton(self.layoutWidget8)
         self.standard_radioButton.setObjectName(u"standard_radioButton")
         self.standard_radioButton.setCursor(QCursor(Qt.PointingHandCursor))
 
@@ -350,20 +465,20 @@ class Ui_main_window(object):
         self.model_cloice_groupBox = QGroupBox(self.central_widget)
         self.model_cloice_groupBox.setObjectName(u"model_cloice_groupBox")
         self.model_cloice_groupBox.setGeometry(QRect(10, 160, 221, 91))
-        self.widget = QWidget(self.model_cloice_groupBox)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 30, 201, 54))
-        self.model_choice_radiobutton_layout = QVBoxLayout(self.widget)
+        self.layoutWidget9 = QWidget(self.model_cloice_groupBox)
+        self.layoutWidget9.setObjectName(u"layoutWidget9")
+        self.layoutWidget9.setGeometry(QRect(10, 30, 201, 54))
+        self.model_choice_radiobutton_layout = QVBoxLayout(self.layoutWidget9)
         self.model_choice_radiobutton_layout.setObjectName(u"model_choice_radiobutton_layout")
         self.model_choice_radiobutton_layout.setContentsMargins(0, 0, 0, 0)
-        self.classic_sir_radioButton = QRadioButton(self.widget)
+        self.classic_sir_radioButton = QRadioButton(self.layoutWidget9)
         self.classic_sir_radioButton.setObjectName(u"classic_sir_radioButton")
         self.classic_sir_radioButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.classic_sir_radioButton.setChecked(True)
+        self.classic_sir_radioButton.setChecked(False)
 
         self.model_choice_radiobutton_layout.addWidget(self.classic_sir_radioButton)
 
-        self.population_sir_radioButton = QRadioButton(self.widget)
+        self.population_sir_radioButton = QRadioButton(self.layoutWidget9)
         self.population_sir_radioButton.setObjectName(u"population_sir_radioButton")
         sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
         sizePolicy4.setHorizontalStretch(0)
@@ -371,6 +486,7 @@ class Ui_main_window(object):
         sizePolicy4.setHeightForWidth(self.population_sir_radioButton.sizePolicy().hasHeightForWidth())
         self.population_sir_radioButton.setSizePolicy(sizePolicy4)
         self.population_sir_radioButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.population_sir_radioButton.setChecked(True)
 
         self.model_choice_radiobutton_layout.addWidget(self.population_sir_radioButton)
 
@@ -407,7 +523,7 @@ class Ui_main_window(object):
 
         self.retranslateUi(main_window)
 
-        self.plotting_widget.setCurrentIndex(0)
+        self.plotting_widget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(main_window)
@@ -459,6 +575,19 @@ class Ui_main_window(object):
         self.plotting_widget.setTabText(self.plotting_widget.indexOf(self.frac_phase_graphpane), QCoreApplication.translate("main_window", u"Fractional phase plane", None))
         self.population_pixlabel.setText("")
         self.plotting_widget.setTabText(self.plotting_widget.indexOf(self.population_graphpane), QCoreApplication.translate("main_window", u"Population dynamics", None))
+        self.bifuraction_radiobuttons.setTitle(QCoreApplication.translate("main_window", u"Choose a diagram", None))
+        self.mu_beta_radButton.setText(QCoreApplication.translate("main_window", u"(mu, beta)", None))
+        self.mu_gamma_radButton.setText(QCoreApplication.translate("main_window", u"(mu, gamma)", None))
+        self.mu_nu_radButton.setText(QCoreApplication.translate("main_window", u"(mu, nu)", None))
+        self.beta_gamma_radButton.setText(QCoreApplication.translate("main_window", u"(beta, gamma)", None))
+        self.beta_nu_radButton.setText(QCoreApplication.translate("main_window", u"(beta, nu)", None))
+        self.gamma_nu_radButton.setText(QCoreApplication.translate("main_window", u"(gamma, nu)", None))
+        self.only_mu_radButton.setText(QCoreApplication.translate("main_window", u"stability regarding mu", None))
+        self.groupBox.setTitle(QCoreApplication.translate("main_window", u"Choose a function to show", None))
+        self.bif_sus_checkBox.setText(QCoreApplication.translate("main_window", u"Susceptible", None))
+        self.bif_inf_checkBox.setText(QCoreApplication.translate("main_window", u"Infectious", None))
+        self.bif_rec_checkBox.setText(QCoreApplication.translate("main_window", u"Recovered", None))
+        self.plotting_widget.setTabText(self.plotting_widget.indexOf(self.bifurcation_graphpane), QCoreApplication.translate("main_window", u"Bifurcation diagrams", None))
 #if QT_CONFIG(statustip)
         self.model_pixlabel.setStatusTip(QCoreApplication.translate("main_window", u"Displays the system of differential equations that defines the model", None))
 #endif // QT_CONFIG(statustip)

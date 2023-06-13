@@ -36,7 +36,10 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideLeft</enum>
     </property>
     <widget class="QWidget" name="dynamics_graphpane">
      <attribute name="title">
@@ -190,6 +193,207 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="bifurcation_graphpane">
+     <attribute name="title">
+      <string>Bifurcation diagrams</string>
+     </attribute>
+     <widget class="MPLWidget" name="mu_beta_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="MPLWidget" name="mu_gamma_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="MPLWidget" name="mu_nu_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="MPLWidget" name="beta_gamma_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="bifuraction_radiobuttons">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>720</y>
+        <width>861</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Choose a diagram</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>523</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QRadioButton" name="mu_beta_radButton">
+            <property name="text">
+             <string>(mu, beta)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="mu_gamma_radButton">
+            <property name="text">
+             <string>(mu, gamma)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="mu_nu_radButton">
+            <property name="text">
+             <string>(mu, nu)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QRadioButton" name="beta_gamma_radButton">
+            <property name="text">
+             <string>(beta, gamma)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="beta_nu_radButton">
+            <property name="text">
+             <string>(beta, nu)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="gamma_nu_radButton">
+            <property name="text">
+             <string>(gamma, nu)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QRadioButton" name="only_mu_radButton">
+            <property name="text">
+             <string>stability regarding mu</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Choose a function to show</string>
+            </property>
+            <widget class="QWidget" name="layoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>20</y>
+               <width>85</width>
+               <height>74</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QCheckBox" name="bif_sus_checkBox">
+                <property name="text">
+                 <string>Susceptible</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="bif_inf_checkBox">
+                <property name="text">
+                 <string>Infectious</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="bif_rec_checkBox">
+                <property name="text">
+                 <string>Recovered</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="MPLWidget" name="only_mu_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="MPLWidget" name="beta_nu_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="MPLWidget" name="gamma_nu_graph" native="true">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>861</width>
+        <height>701</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QLabel" name="model_pixlabel">
     <property name="geometry">
@@ -302,7 +506,7 @@
          <number>9999999</number>
         </property>
         <property name="value">
-         <number>365</number>
+         <number>2000</number>
         </property>
        </widget>
       </item>
@@ -457,10 +661,10 @@
            <number>8</number>
           </property>
           <property name="singleStep">
-           <double>0.010000000000000</double>
+           <double>0.000001000000000</double>
           </property>
           <property name="value">
-           <double>0.330000000000000</double>
+           <double>0.000001000000000</double>
           </property>
          </widget>
         </item>
@@ -475,8 +679,14 @@
           <property name="decimals">
            <number>8</number>
           </property>
+          <property name="maximum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
           <property name="value">
-           <double>0.130000000000000</double>
+           <double>0.200000000000000</double>
           </property>
          </widget>
         </item>
@@ -579,6 +789,12 @@
           <property name="decimals">
            <number>8</number>
           </property>
+          <property name="maximum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
+          </property>
           <property name="value">
            <double>0.005000000000000</double>
           </property>
@@ -587,7 +803,10 @@
         <item>
          <widget class="QSpinBox" name="total_births_spinBox">
           <property name="maximum">
-           <number>999999999</number>
+           <number>100000</number>
+          </property>
+          <property name="singleStep">
+           <number>500</number>
           </property>
           <property name="value">
            <number>5000</number>
@@ -659,7 +878,7 @@
     <property name="title">
      <string>Choose the model</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -678,7 +897,7 @@
          <string>Classic SIR model</string>
         </property>
         <property name="checked">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -695,6 +914,9 @@
         </property>
         <property name="text">
          <string>SIR model with population</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

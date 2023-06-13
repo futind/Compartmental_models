@@ -1,5 +1,7 @@
 from epidemic_model import SIR_model
 
+import numpy as np
+
 class SIR_vitality(SIR_model):
 
     # An initialization method for our class
@@ -159,6 +161,57 @@ class SIR_vitality(SIR_model):
         self.susceptible_fraction_data.append(self.susceptible_data[-1] / self.population_data[-1])
         self.infectious_fraction_data.append(self.infectious_data[-1] / self.population_data[-1])
     
+    # Lienard-Chipart (EE)
+
+    def EE_a1(self, beta, gamma, mu, nu):
+        return (beta * nu)/(gamma + mu) + mu
+
+    def EE_a2(self, beta, gamma, mu, nu):
+        return (beta * nu * mu)/(gamma + mu) - mu*(gamma + mu) + beta*nu
+
+    def EE_a3(self, beta, gamma, mu, nu):
+        return (beta * nu * mu) - (mu ** 2)*(gamma + mu)
+
+    def EE_d2(self, beta, gamma, mu, nu):
+        return ((beta * nu)/(gamma + mu) + mu)*( (beta * nu * mu)/(gamma + mu) - mu*(gamma + mu) + beta*nu ) - beta*nu*mu + (mu**2)*(gamma + mu)
+    
+    # Hurwitz (DFE)
+
+    def DFE_d1(self, beta, gamma, mu, nu):
+        return -( (beta*nu)/mu - gamma - 3*mu)
+
+    def DFE_d2(self, beta, gamma, mu, nu):
+        return 2*mu*((2*mu - ((beta*nu)/mu - gamma))**2)
+
+    def DFE_d3(self, beta, gamma, mu, nu):
+        return 2*(mu**3)*( 4*(mu**3) - 8*(mu**2)*(beta*nu/mu - gamma) + 5*mu*((beta*nu/mu - gamma)**2) - ((beta*nu/mu - gamma)**3) )
+
+    # Stability determination (1 - DFE, 0 - borderline stability, -1 - EE)
+    def Stability(self, beta, gamma, mu, nu):
+        if ((self.DFE_d1(beta, gamma, mu, nu) > 0) & \
+            (self.DFE_d2(beta, gamma, mu, nu) > 0) & \
+            (self.DFE_d3(beta, gamma, mu, nu) > 0)):
+            return 'green'
+        elif (self.DFE_d3(beta, gamma, mu, nu) == 0):
+            return 'black'
+        elif ((self.EE_a1(beta, gamma, mu, nu) > 0) & \
+              (self.EE_a2(beta, gamma, mu, nu) > 0) & \
+              (self.EE_a3(beta, gamma, mu, nu) > 0) & \
+              (self.EE_d2(beta, gamma, mu, nu) > 0)):
+            return 'red'
+
+    # EE coordinats
+    def Endemic_equilibria(self):
+        return [self.total_births / self.mortality_rate, 0, 0]
+
+    # DFE coordinats
+    def Disease_free_equilibria(self):
+        mu = self.mortality_rate
+        nu = self.total_births
+        beta = self.contact_rate
+        gamma = self.recovery_rate
+        return [(gamma + mu)/beta, nu/(gamma + mu) - mu/beta, (gamma*nu)/(mu*(gamma + mu)) - gamma/beta]
+
     # method that integrates the system with Runge-Kutta's method
     # and stores the output into the data lists
     def compute(self, time_step: float):
